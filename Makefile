@@ -34,4 +34,4 @@ clean:
 remake:
 	make clean && clear && make
 
-.PHONY: all clean remake run_tests
+.PHONY: all clean remake
