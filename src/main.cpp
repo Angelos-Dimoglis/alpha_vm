@@ -3,6 +3,10 @@
 #include <cassert>
 #include <fstream>
 
+#include "../lib/rel_table.h"
+
+using namespace std;
+
 int main(int argc, char **argv) {
     bool input_file_set = false;
 
@@ -24,6 +28,9 @@ int main(int argc, char **argv) {
     }
 
     // write binary file locally
+
+    cout << "Hello world!\n";
+    say_my_name("bobo");
 
     return 0;
 }
