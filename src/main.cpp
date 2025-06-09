@@ -30,7 +30,6 @@ int main(int argc, char **argv) {
     // write binary file locally
 
     cout << "Hello world!\n";
-    say_my_name("bobo");
 
     return 0;
 }
