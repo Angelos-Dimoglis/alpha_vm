@@ -1,11 +1,12 @@
+#pragma once
+
 #include <string>
 #include <variant>
 #include <vector>
-#include <../lib/rel_table.h>
+
+class avm_table;
 
 using namespace std;
-
-vector<avm_memcell> stack;
 
 enum avm_memcell_t {
     number_m    = 0,
@@ -29,6 +30,8 @@ struct avm_memcell {
     avm_memcell() : type(undef_m), data(0.0) {}
     avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
 };
+
+inline vector<avm_memcell> stack;
 
 struct avm_memcell_hash {
     size_t operator()(const avm_memcell& m) const {

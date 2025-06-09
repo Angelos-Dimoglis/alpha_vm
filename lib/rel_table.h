@@ -1,7 +1,8 @@
 #pragma once
 
-#include <../lib/avm_memcell.h>
 #include <unordered_map>
+
+#include "avm_memcell.h"
 
 class avm_table {
     private:
