@@ -31,5 +31,8 @@ int main(int argc, char **argv) {
 
     cout << "Hello world!\n";
 
+    //for (;;)
+        // execute instruction
+
     return 0;
 }
