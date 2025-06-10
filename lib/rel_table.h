@@ -4,6 +4,10 @@
 
 #include "avm_memcell.h"
 
+struct avm_memcell_hash {
+    size_t operator()(const avm_memcell& m) const;
+};
+
 class avm_table {
     private:
         unsigned refCounter;
