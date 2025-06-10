@@ -7,6 +7,12 @@
 
 using namespace std;
 
+void init_vm() {
+}
+
+void cleanup_vm() {
+}
+
 int main(int argc, char **argv) {
     bool input_file_set = false;
 
@@ -27,12 +33,15 @@ int main(int argc, char **argv) {
         }
     }
 
-    // write binary file locally
+    init_vm();
 
-    cout << "Hello world!\n";
+    // load binary file locally
 
     //for (;;)
         // execute instruction
+
+    cleanup_vm();
+
 
     return 0;
 }
