@@ -3,8 +3,7 @@
 #include <string>
 #include <variant>
 #include <vector>
-
-class avm_table;
+#include <unordered_map>
 
 using namespace std;
 
@@ -19,6 +18,8 @@ enum avm_memcell_t {
     undef_m     = 7 
 };
 
+class avm_table;
+
 struct avm_memcell {
     avm_memcell_t type;
     variant<double, string, bool, avm_table*, unsigned> data;
@@ -29,4 +30,21 @@ struct avm_memcell {
     avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
 };
 
-inline vector<avm_memcell> stack;
+struct avm_memcell_hash {
+    size_t operator()(const avm_memcell& m) const;
+};
+
+class avm_table {
+    private:
+        unsigned refCounter;
+        unordered_map<avm_memcell, avm_memcell, avm_memcell_hash> indexed;
+
+    public:
+        avm_table() : refCounter(0) {}
+
+        void avm_tableincrefcounter();
+        void avm_decrefcounter();
+        const avm_memcell avm_tablegetelem(const avm_memcell& key) const;
+        void avm_tablesetelem(const avm_memcell& key, const avm_memcell& value);
+};
+
