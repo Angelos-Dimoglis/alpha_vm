@@ -18,8 +18,6 @@ enum avm_memcell_t {
     undef_m     = 7 
 };
 
-class avm_table;
-
 struct avm_memcell {
     avm_memcell_t type;
     variant<double, string, bool, avm_table*, unsigned> data;
@@ -47,4 +45,3 @@ class avm_table {
         const avm_memcell avm_tablegetelem(const avm_memcell& key) const;
         void avm_tablesetelem(const avm_memcell& key, const avm_memcell& value);
 };
-

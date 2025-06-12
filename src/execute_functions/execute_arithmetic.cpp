@@ -51,5 +51,15 @@ void execute_arithmetic (instruction* instr) {
     avm_memcell* rv1 = avm_translate_operand(&instr->arg1, &ax);
     avm_memcell* rv2 = avm_translate_operand(&instr->arg2, &bx);
 
-    assert(lv && (&stack[0] <= lv && &stack.front() > lv || lv == &retval))
+    assert(lv && (&stack[0] <= lv && &stack.front() > lv || lv == &retval));
+    assert(rv1 && rv2);
+    if (rv1->type != number_m || rv2->type != number_m) {
+        avm_error("Not a number in arithmetic!");
+    }
+    else {
+        arithmetic_func_t op = arithmeticFuncs[instr->opcode - add_v];
+        avm_memcellclear(lv);
+        lv->type = number_m;
+        lv->data = (*op) (get<double>(rv1->data), get<double>(rv2->data));
+    }
 }

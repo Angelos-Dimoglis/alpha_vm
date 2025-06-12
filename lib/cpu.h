@@ -4,7 +4,7 @@
 
 typedef void (*execute_func_t) (instruction*);
 
-#define AVM_MAX_INSTRUCTIONS (unsigned) nop_v;
+#define AVM_MAX_INSTRUCTIONS (unsigned) nop_v
 
 extern void execute_assign(instruction*);
 extern void execute_add(instruction*);

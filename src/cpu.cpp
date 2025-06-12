@@ -14,7 +14,7 @@ extern vector<string> strConsts;
 extern vector<string> namedLibfuncs;
 extern vector<userfunc*> userFuncs;
 
-unsigned char executionFinished = 0;
+bool executionFinished = 0;
 unsigned pc = 0;
 unsigned currLine = 0;
 unsigned codeSize = 0;
@@ -45,11 +45,11 @@ void execute_cycle (void) {
 avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
     switch (arg->type) {
         case global_a:
-            return &stack[stack.max_size() - 1 - arg->val];
+            return &stack[stack.size() - 1 - arg->val];
         case local_a:
             return &stack[topsp - arg->val];
         case formal_a:
-            return &stack[topsp + stack.size() + 1 + arg->val];
+            return &stack[topsp + AVM_STACKENV_SIZE + 1 + arg->val];
         case retval_a:
             return &retval;
 

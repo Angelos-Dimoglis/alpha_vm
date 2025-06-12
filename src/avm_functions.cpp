@@ -2,6 +2,8 @@
 #include <cstring>
 #include "../lib/avm_functions.h"
 
+extern bool executionFinished;
+
 void memclear_string(avm_memcell* m) {
     assert(!m->data.valueless_by_exception());
     delete get<string*>(m->data);
@@ -48,7 +50,7 @@ void avm_assign(avm_memcell* lv, avm_memcell* rv) {
     }
 }
 
-
 void avm_error(string format) {
     cerr << format << endl;
+    executionFinished = 1;
 }

@@ -6,7 +6,7 @@ typedef void (*memclear_func_t) (avm_memcell*);
 void memclear_string(avm_memcell* m);
 void memclear_table(avm_memcell* m);
 
-memclear_func_t memclearFuns[] = {
+memclear_func_t memclearFuncs[] = {
     0, /*number*/
     memclear_string,
     0, /*bool*/
@@ -17,6 +17,10 @@ memclear_func_t memclearFuns[] = {
     0  /*undef*/
 };
 
+void avm_memcellclear(avm_memcell* m);
+
 void avm_warning(string format);
 
 void avm_assign(avm_memcell* lv, avm_memcell* rv);
+
+void avm_error(string format);
