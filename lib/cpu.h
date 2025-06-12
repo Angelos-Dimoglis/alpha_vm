@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../lib/avm_instr_set.h"
+#include "../lib/avm_memcell.h"
 
 typedef void (*execute_func_t) (instruction*);
 
@@ -29,31 +30,5 @@ extern void execute_newtable(instruction*);
 extern void execute_tablegetelem(instruction*);
 extern void execute_tablesetelem(instruction*);
 extern void execute_nop(instruction*);
-
-execute_func_t executeFuncs[] = {
-    execute_assign,
-    execute_add,
-    execute_sub,
-    execute_mul,
-    execute_mod,
-    execute_uminus,
-    execute_and,
-    execute_or,
-    execute_not,
-    execute_jeq,
-    execute_jne,
-    execute_jle,
-    execute_jge,
-    execute_jlt,
-    execute_jgt,
-    execute_call,
-    execute_pusharg,
-    execute_funcenter,
-    execute_funcexit,
-    execute_newtable,
-    execute_tablegetelem,
-    execute_tablesetelem,
-    execute_nop
-};
 
 avm_memcell* avm_translate_operand (vmarg* arg, avm_memcell* reg);

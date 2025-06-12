@@ -5,8 +5,8 @@
 extern bool executionFinished;
 
 void memclear_string(avm_memcell* m) {
-    assert(!m->data.valueless_by_exception());
-    delete get<string*>(m->data);
+    assert(holds_alternative<string>(m->data));  // ensure it is a string
+    get<string>(m->data).clear();                // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {

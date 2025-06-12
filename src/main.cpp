@@ -3,7 +3,7 @@
 #include <cassert>
 #include <fstream>
 
-#include "../lib/rel_table.h"
+#include "../lib/avm_functions.h"
 
 using namespace std;
 
