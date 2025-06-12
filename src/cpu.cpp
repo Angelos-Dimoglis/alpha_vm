@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include "../lib/avm_memcell.h"
+#include "../lib/avm_instr_set.h"
 
 #define AVM_STACKENV_SIZE 4
 avm_memcell ax, bx, cx;
@@ -14,10 +15,64 @@ unsigned top, topsp;
 double    consts_getnumber  (unsigned index);
 char     *consts_getstring  (unsigned index);
 char     *libfunc_getused   (unsigned index);
-userfunc *userfuncs_getfunc (unsigned index);
+//userfunc *userfuncs_getfunc (unsigned index);
 
+unsigned char executionFinished = 0;
+unsigned pc = 0;
+unsigned currLine = 0;
+unsigned codeSize = 0;
+struct instruction *code = 0;
+#define AVM_ENDING_PC codeSize
+
+execute_func_t executeFuncs [] = {
+    execute_assign,
+    execute_add,
+    execute_sub,
+    execute_mul,
+    execute_div,
+    execute_mod,
+    execute_uminus,
+    execute_and,
+    execute_or,
+    execute_not,
+    execute_jeq,
+    execute_jne,
+    execute_jle,
+    execute_jge,
+    execute_jlt,
+    execute_jgt,
+    execute_call,
+    execute_pusharg,
+    execute_funcenter,
+    execute_funcexit,
+    execute_newtable,
+    execute_tablegetelem,
+    execute_tablesetelem,
+    execute_nop
+};
+
+void execute_cycle (void) {
+    if (executionFinished)
+        return;
+
+    if (pc == AVM_ENDING_PC) {
+        executionFinished = 1;
+        return;
+    }
+
+    assert(pc < AVM_ENDING_PC);
+    struct instruction *instr = code + pc;
+    assert(instr->opcode >= 0 && instr->opcode <= AVM_MAX_INSTRUCTIONS);
+    if (instr->srcLine)
+        currLine = instr->srcLine;
+    unsigned oldPC = pc;
+    (*executeFuncs[instr->opcode])(instr);
+    if (pc == oldPC)
+        pc++;
+}
 
 // this will be called by the execute_... functions
+/*
 avm_memcell *avm_translate_operand (vmarg *arg, avm_memcell *reg) {
     switch (arg->type) {
         case global_a:
@@ -65,3 +120,4 @@ avm_memcell *avm_translate_operand (vmarg *arg, avm_memcell *reg) {
         default: assert(0);
     }
 }
+*/
