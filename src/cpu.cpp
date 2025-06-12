@@ -1,5 +1,6 @@
 #include <cassert>
-
+#include <string.h>
+#include "../lib/cpu.h"
 #include "../lib/avm_memcell.h"
 
 #define AVM_STACKENV_SIZE 4
@@ -7,34 +8,34 @@ avm_memcell ax, bx, cx;
 avm_memcell retval;
 unsigned top, topsp;
 
-// TODO: placement of this code might be wrong
-/* Reverse translation for constants:
- * getting constant value from index.
- */
-double    consts_getnumber  (unsigned index);
-char     *consts_getstring  (unsigned index);
-char     *libfunc_getused   (unsigned index);
-userfunc *userfuncs_getfunc (unsigned index);
+extern vector<double> numConsts;
+extern vector<string> strConsts;
+extern vector<string> namedLibfuncs;
+extern vector<userfunc*> userFuncs;
 
+inline vector<avm_memcell> stack;
 
 // this will be called by the execute_... functions
-avm_memcell *avm_translate_operand (vmarg *arg, avm_memcell *reg) {
+avm_memcell* avm_translate_operand (vmarg* arg, avm_memcell* reg) {
     switch (arg->type) {
         case global_a:
+            return &stack[stack.max_size() - 1 - arg->val];
         case local_a:
+            return &stack[topsp - arg->val];
         case formal_a:
+            return &stack[topsp + stack.size() + 1 + arg->val];
         case retval_a:
             return &retval;
 
         case number_a: {
             reg->type = number_m;
-            reg->data = consts_getnumber(arg->val);
+            reg->data = numConsts[arg->val];
             return reg; 
         }
 
         case string_a: {
             reg->type = string_m;
-            reg->data = strdup(consts_getstring(arg->val));
+            reg->data = strConsts[arg->val];
             return reg;
         }
 
@@ -52,13 +53,13 @@ avm_memcell *avm_translate_operand (vmarg *arg, avm_memcell *reg) {
         case userfunc_a: {
             reg->type = userfunc_m;
             // TODO: see lec 15 slide 10
-            reg->data = userfuncs_getfunc(arg->val)->address;
+            reg->data = userFuncs[arg->val]->address;
             return reg;
         }
 
         case libfunc_a: {
             reg->type = libfunc_m;
-            reg->data = libfunc_getused(arg->val);
+            reg->data = namedLibfuncs[arg->val];
             return reg;
         }
 
