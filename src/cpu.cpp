@@ -2,10 +2,10 @@
 
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
+#include "../lib/cpu.h"
 
 #define AVM_STACKENV_SIZE 4
-avm_memcell ax, bx, cx;
-avm_memcell retval;
+avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
 // TODO: placement of this code might be wrong
@@ -15,7 +15,7 @@ unsigned top, topsp;
 double    consts_getnumber  (unsigned index);
 char     *consts_getstring  (unsigned index);
 char     *libfunc_getused   (unsigned index);
-//userfunc *userfuncs_getfunc (unsigned index);
+userfunc *userfuncs_getfunc (unsigned index);
 
 unsigned char executionFinished = 0;
 unsigned pc = 0;
