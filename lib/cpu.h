@@ -53,3 +53,5 @@ execute_func_t executeFuncs[] = {
     execute_tablesetelem,
     execute_nop
 };
+
+avm_memcell* avm_translate_operand (vmarg* arg, avm_memcell* reg);

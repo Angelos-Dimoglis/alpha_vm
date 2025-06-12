@@ -16,7 +16,7 @@ extern vector<userfunc*> userFuncs;
 inline vector<avm_memcell> stack;
 
 // this will be called by the execute_... functions
-avm_memcell* avm_translate_operand (vmarg* arg, avm_memcell* reg) {
+avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
     switch (arg->type) {
         case global_a:
             return &stack[stack.max_size() - 1 - arg->val];
