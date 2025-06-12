@@ -4,6 +4,29 @@
 
 using namespace std;
 
+avm_memcell nil_memcell(nil_m);
+
+size_t avm_memcell_hash::operator()(const avm_memcell& m) const {
+        size_t hashValue = hash<int>()(static_cast<int>(m.type));
+
+        if (holds_alternative<double>(m.data)) {
+            hashValue ^= hash<double>()(get<double>(m.data));
+        }
+        else if (holds_alternative<string>(m.data)) {
+            hashValue ^= hash<string>()(get<string>(m.data));
+        }
+        else if (holds_alternative<bool>(m.data)) {
+            hashValue ^= hash<bool>()(get<bool>(m.data));
+        }
+        else if (holds_alternative<avm_table*>(m.data)) {
+            hashValue ^= hash<avm_table*>()(get<avm_table*>(m.data));
+        }
+        else if (holds_alternative<unsigned>(m.data)) {
+            hashValue ^= hash<unsigned>()(get<unsigned>(m.data));
+        }
+        return hashValue;
+}
+
 void avm_table::avm_tableincrefcounter() {
     refCounter++;
 }
