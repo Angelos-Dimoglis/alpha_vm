@@ -14,6 +14,17 @@ void memclear_table(avm_memcell* m) {
     get<avm_table*>(m->data)->avm_decrefcounter();
 }
 
+memclear_func_t memclearFuncs[] = {
+    0, /*number*/
+    memclear_string,
+    0, /*bool*/
+    memclear_table,
+    0, /*usefunc*/
+    0, /*libfunc*/
+    0, /*nil*/
+    0  /*undef*/
+};
+
 void avm_memcellclear(avm_memcell* m) {
     if (m->type != undef_m) {
         memclear_func_t f = memclearFuncs[m->type];
@@ -53,4 +64,29 @@ void avm_assign(avm_memcell* lv, avm_memcell* rv) {
 void avm_error(string format) {
     cerr << format << endl;
     executionFinished = 1;
+}
+
+bool number_tobool(avm_memcell* m) { return get<double>(m->data) != 0; }
+bool string_tobool(avm_memcell* m) { return get<string>(m->data)[0] != 0; }
+bool bool_tobool(avm_memcell* m) { return get<bool>(m->data); }
+bool table_tobool(avm_memcell* m) { return 1; }
+bool userfunc_tobool(avm_memcell* m) { return 1; }
+bool libfunc_tobool(avm_memcell* m) { return 1; }
+bool nil_tobool(avm_memcell* m) { return 0; }
+bool undef_tobool(avm_memcell* m) { assert(0); return 0; }
+
+tobool_func_t toboolFuncs[] = {
+    number_tobool,
+    string_tobool,
+    bool_tobool,
+    table_tobool,
+    userfunc_tobool,
+    libfunc_tobool,
+    nil_tobool,
+    undef_tobool
+};
+
+bool avm_tobool(avm_memcell* m) {
+    assert(m->type >= 0 && m->type < undef_m);
+    return (*toboolFuncs[m->type]) (m);
 }
