@@ -23,7 +23,7 @@ void avm_memcellclear(avm_memcell* m) {
 }
 
 void avm_warning(string format) {
-    cerr << format << endl;
+    cout << format << endl;
 }
 
 void avm_assign(avm_memcell* lv, avm_memcell* rv) {
@@ -46,4 +46,9 @@ void avm_assign(avm_memcell* lv, avm_memcell* rv) {
     else if (lv->type == table_m) {
         get<avm_table*>(lv->data)->avm_tableincrefcounter();
     }
+}
+
+
+void avm_error(string format) {
+    cerr << format << endl;
 }
