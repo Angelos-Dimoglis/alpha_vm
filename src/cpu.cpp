@@ -1,13 +1,14 @@
 #include <cassert>
-#include "../lib/cpu.h"
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
 #include "../lib/cpu.h"
+#include "../lib/runtime_stack.h"
 
 #define AVM_STACKENV_SIZE 4
 avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
+extern vector<avm_memcell> stack;
 extern vector<double> numConsts;
 extern vector<string> strConsts;
 extern vector<string> namedLibfuncs;
@@ -39,8 +40,6 @@ void execute_cycle (void) {
     if (pc == oldPC)
         pc++;
 }
-
-inline vector<avm_memcell> stack;
 
 // this will be called by the execute_... functions
 avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
@@ -93,4 +92,3 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
         default: assert(0);
     }
 }
-*/
