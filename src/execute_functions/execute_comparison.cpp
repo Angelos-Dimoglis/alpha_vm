@@ -1,10 +1,10 @@
 #include "../../lib/avm_functions.h"
 #include "../../lib/cpu.h"
 
-#define execute_jle execute_compare
-#define execute_jge execute_compare
-#define execute_jlt execute_compare
-#define execute_jgt execute_compare
+#define execute_jle execute_comparison
+#define execute_jge execute_comparison
+#define execute_jlt execute_comparison
+#define execute_jgt execute_comparison
 
 typedef bool (*cmp_func) (double, double);
 
