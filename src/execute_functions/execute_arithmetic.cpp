@@ -1,11 +1,6 @@
 #include "../../lib/avm_functions.h"
 #include "../../lib/cpu.h"
 
-extern avm_memcell ax, bx;
-extern avm_memcell retval;
-
-extern vector<avm_memcell> stack;
-
 typedef double (*arithmetic_func_t) (double x, double y);
 
 double add_impl(double x, double y) { return x + y; }
@@ -14,6 +9,7 @@ double mul_impl(double x, double y) { return x * y; }
 double div_impl(double x, double y) {
     if (y == 0.0) {
         avm_error("Cannot divide with 0!");
+        assert(0);
     } else {
         return x / y;
     }
@@ -22,6 +18,7 @@ double div_impl(double x, double y) {
 double mod_impl(double x, double y) {
     if (((unsigned) y) == 0) {
         avm_error("Cannot modulo with 0!");
+        assert(0);
     } else {
         return ((unsigned) x) % ((unsigned) y);
     }

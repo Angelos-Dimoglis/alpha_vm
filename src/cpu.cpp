@@ -8,8 +8,6 @@
 avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
-extern vector<avm_memcell> stack;
-
 vector<double> numConsts;
 vector<string> strConsts;
 vector<string> namedLibfuncs;

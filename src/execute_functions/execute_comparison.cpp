@@ -3,8 +3,6 @@
 
 typedef bool (*cmp_func) (double, double);
 
-extern avm_memcell ax, bx;
-
 extern bool executionFinished;
 extern unsigned pc;
 

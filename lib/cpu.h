@@ -5,6 +5,9 @@
 
 typedef void (*execute_func_t) (instruction*);
 
+extern vector<avm_memcell> stack;
+extern avm_memcell ax, bx, cx, retval;
+
 #define AVM_MAX_INSTRUCTIONS (unsigned) nop_v
 
 #define execute_add execute_arithmetic

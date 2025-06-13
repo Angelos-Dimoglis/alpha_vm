@@ -1,13 +1,6 @@
 #include <assert.h>
 #include "../../lib/cpu.h"
-#include "../../lib/avm_memcell.h"
-
-extern avm_memcell ax;
-extern avm_memcell retval;
-extern vector<avm_memcell> stack;
-
-extern void avm_warning(string format);
-extern void avm_assign(avm_memcell* lv, avm_memcell* rv);
+#include "../../lib/avm_functions.h"
 
 void execute_assign(instruction* instr) {
     avm_memcell* lv = avm_translate_operand(&instr->result, &nil_memcell);
