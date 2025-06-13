@@ -151,3 +151,36 @@ void avm_callsaveenvironment() {
     avm_push_envvalue(top + totalActuals + 2);
     avm_push_envvalue(topsp);
 }
+
+unsigned avm_get_envvalue(unsigned i) {
+    assert(stack[i].type == number_m);
+    unsigned val = get<unsigned>(stack[i].data);
+    assert(get<unsigned>(stack[i].data) == ((double) val));
+    return val;
+}
+
+void avm_push_table_arg(avm_table* t) {
+    stack[top].type = table_m;
+    stack[top].data = t;
+    get<avm_table*>(stack[top].data)->avm_tableincrefcounter();
+    totalActuals++;
+    avm_dec_top();
+}
+
+string avm_tostring(avm_memcell* m) {
+    assert(m->type >= 0 && m->type <= undef_m);
+}
+
+//TODO
+library_func_t avm_getlibraryfunc(string id) { }
+
+void avm_calllibfunc(string id) {
+    library_func_t f = avm_getlibraryfunc(id);
+    if (!f) {
+        avm_error("unsopported lib func " + id + " called!");
+    }
+    else {
+
+    }
+}
+

@@ -1,7 +1,12 @@
 #include "../../lib/avm_functions.h"
 #include "../../lib/cpu.h"
 
+#define AVM_NUMACTUALS_OFFSET   +4
+#define AVM_SAVEDPC_OFFSET      +3
+#define AVM_SAVEDTOP_OFFSET     +2
+#define AVM_SAVEDTOPSP_OFFSET   +1
 
+extern unsigned totalActuals;
 
 void execute_call(instruction* instr) {
     avm_memcell* func = avm_translate_operand(&instr->result, &ax);
@@ -27,4 +32,34 @@ void execute_call(instruction* instr) {
             avm_error("call: cannot bind " + avm_tostring(func) + " to function!");
         }
     }
+}
+
+void execute_funcenter(instruction* instr) {
+    avm_memcell* func = avm_translate_operand(&instr->result, &ax);
+    assert(func);
+    assert(pc == get<unsigned>(func->data));
+
+    totalActuals = 0;
+    userfunc* funcInfo = avm_getfuncinfo(pc);
+    topsp = top;
+    top = top - funcInfo->localSize;
+}
+
+void execute_funcexit(instruction* unused) {
+    unsigned oldTop = top;
+    top = avm_get_envvalue(topsp + AVM_SAVEDTOP_OFFSET);
+    pc = avm_get_envvalue(topsp + AVM_SAVEDPC_OFFSET);
+    topsp = avm_get_envvalue(topsp + AVM_SAVEDTOPSP_OFFSET);
+
+    while (++oldTop <= top)
+        avm_memcellclear(&stack[oldTop]);
+}
+
+void execute_pusharg(instruction* instr) {
+    avm_memcell* arg = avm_translate_operand(&instr->arg1, &ax);
+    assert(arg);
+
+    avm_assign(&stack[top], arg);
+    totalActuals++;
+    avm_dec_top();
 }

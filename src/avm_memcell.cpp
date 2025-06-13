@@ -9,6 +9,19 @@ bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
 }
 
+string avm_memcell::tostring() {
+    switch (type) {
+        case number_m:
+            return to_string(get<double>(data));
+        case string_m:
+            return get<string>(data);
+        case bool_m:
+            return to_string(get<bool>(data));
+        case table_m:
+            return "nikos";
+    }
+}
+
 size_t avm_memcell_hash::operator()(const avm_memcell& m) const {
     size_t hashValue = hash<int>()(static_cast<int>(m.type));
 
