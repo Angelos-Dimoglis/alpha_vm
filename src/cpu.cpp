@@ -23,7 +23,7 @@ struct instruction *code = 0;
 
 #define AVM_ENDING_PC codeSize
 
-void execute_uminus(instruction*){}
+//to do
 void execute_jmp(instruction*){}
 void execute_call(instruction*){}
 void execute_pusharg(instruction*){}
@@ -41,7 +41,6 @@ execute_func_t executeFuncs[] = {
     execute_mul,
     execute_div,
     execute_mod,
-    execute_uminus,
     execute_jeq,
     execute_jne,
     execute_jle,

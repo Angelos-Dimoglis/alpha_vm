@@ -5,12 +5,12 @@
 extern bool executionFinished;
 
 void memclear_string(avm_memcell* m) {
-    assert(holds_alternative<string>(m->data));  // ensure it is a string
+    //assert(holds_alternative<string>(m->data));  // ensure it is a string
     get<string>(m->data).clear();                // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {
-    assert(holds_alternative<avm_table>(m->data));
+    //assert(holds_alternative<avm_table>(m->data));
     get<avm_table*>(m->data)->avm_decrefcounter();
 }
 

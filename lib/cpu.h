@@ -23,7 +23,6 @@ extern void execute_add(instruction*);
 extern void execute_sub(instruction*);
 extern void execute_mul(instruction*);
 extern void execute_mod(instruction*);
-extern void execute_uminus(instruction*);
 extern void execute_jeq(instruction*);
 extern void execute_jne(instruction*);
 extern void execute_jle(instruction*);
