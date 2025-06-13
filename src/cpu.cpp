@@ -19,8 +19,6 @@ unsigned currLine = 0;
 unsigned codeSize = 0;
 struct instruction *code = 0;
 
-#define AVM_ENDING_PC codeSize
-
 //to do
 void execute_jmp(instruction*){}
 void execute_call(instruction*){}

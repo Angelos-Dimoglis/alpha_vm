@@ -7,6 +7,14 @@ typedef void (*execute_func_t) (instruction*);
 
 extern vector<avm_memcell> stack;
 extern avm_memcell ax, bx, cx, retval;
+extern unsigned top, topsp;
+
+extern bool executionFinished;
+extern unsigned pc;
+extern unsigned codeSize;
+extern struct instruction *code;
+
+#define AVM_ENDING_PC codeSize
 
 #define AVM_MAX_INSTRUCTIONS (unsigned) nop_v
 

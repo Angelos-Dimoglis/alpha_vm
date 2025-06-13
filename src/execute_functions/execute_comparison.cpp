@@ -3,9 +3,6 @@
 
 typedef bool (*cmp_func) (double, double);
 
-extern bool executionFinished;
-extern unsigned pc;
-
 tobool_func_t toboolFuncs[] = {
     number_tobool,
     string_tobool,

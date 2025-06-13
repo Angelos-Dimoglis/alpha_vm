@@ -1,8 +1,9 @@
 #include <iostream>
 #include <cstring>
 #include "../lib/avm_functions.h"
+#include "../lib/cpu.h"
 
-extern bool executionFinished;
+unsigned totalActuals = 0;
 
 void memclear_string(avm_memcell* m) {
     //assert(holds_alternative<string>(m->data));  // ensure it is a string
@@ -98,11 +99,55 @@ bool nil_tobool(avm_memcell* m) {
 }
 
 bool undef_tobool(avm_memcell* m) {
-    assert(0); // NOTE: ?????
+    assert(0); // NOTE: ????? (se ponaw)
     return 0; 
 }
 
 bool avm_tobool(avm_memcell* m) {
     assert(m->type >= 0 && m->type < undef_m);
     return (*toboolFuncs[m->type]) (m);
+}
+
+void avm_call_functor(avm_table* t) {
+    cx.type = string_m;
+    cx.data = "()";
+    avm_memcell* f = t->avm_tablegetelem(cx);
+    if (!f) {
+        avm_error("in calling table: n '()' element found!");
+    }
+    else if (f->type == table_m) {
+        avm_call_functor(get<avm_table*>(f->data));
+    }
+    else if (f->type == userfunc_m) {
+        avm_push_table_arg(t);
+        avm_callsaveenvironment();
+        pc = get<unsigned>(f->data);
+        assert(pc < AVM_ENDING_PC && code[pc].opcode == funcenter_v);
+    }
+    else {
+        avm_error("in calling table: illegal '()' elemnt value!");
+    }
+}
+
+void avm_dec_top() {
+    if (!top) {
+        avm_error("stack overflow");
+    }
+    else {
+        top--;
+    }
+}
+
+void avm_push_envvalue(unsigned val) {
+    stack[top].type = number_m;
+    stack[top].data = val;
+    avm_dec_top();
+}
+
+void avm_callsaveenvironment() {
+    avm_push_envvalue(totalActuals);
+    assert(code[pc].opcode == call_v);
+    avm_push_envvalue(pc+1);
+    avm_push_envvalue(top + totalActuals + 2);
+    avm_push_envvalue(topsp);
 }

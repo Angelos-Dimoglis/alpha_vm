@@ -47,6 +47,6 @@ class avm_table {
 
         void avm_tableincrefcounter();
         void avm_decrefcounter();
-        const avm_memcell avm_tablegetelem(const avm_memcell& key) const;
+        avm_memcell* avm_tablegetelem(const avm_memcell& key);
         void avm_tablesetelem(const avm_memcell& key, const avm_memcell& value);
 };

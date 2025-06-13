@@ -42,13 +42,13 @@ void avm_table::avm_decrefcounter() {
         delete this;
 }
 
-const avm_memcell avm_table::avm_tablegetelem(const avm_memcell& key) const {
+avm_memcell* avm_table::avm_tablegetelem(const avm_memcell& key) {
     auto pair = indexed.find(key);
 
     if (pair != indexed.end())
-        return pair->second;
+        return &(pair->second);
 
-    return nil_memcell;
+    return nullptr;
 }
 
 void avm_table::avm_tablesetelem (

@@ -30,3 +30,10 @@ bool undef_tobool(avm_memcell* m);
 extern tobool_func_t toboolFuncs[];
 
 bool avm_tobool(avm_memcell* m);
+
+string avm_tostring(avm_memcell*);
+void avm_calllibfunc(string funcName);
+void avm_callsaveenvironment();
+void avm_call_functor(avm_table* t);
+
+void avm_push_table_arg(avm_table* t);
