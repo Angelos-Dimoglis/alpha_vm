@@ -1,37 +1,45 @@
 # Author: Angelos T. Dimoglis
 # AM: csd5078
 
-# compiler related variables
+# Compiler settings
 CC = g++
 CFLAGS = -g -Ilib -std=c++20
 
-# target executable
+# Target executable
 TARGET = alpha_vm.out
 
-# directory variables
+# Directory setup
 BIN_DIR = bin
-SRCS = $(wildcard src/*.cpp)
-OBJS = $(patsubst src/%.cpp, $(BIN_DIR)/%.o, $(SRCS))
+SRC_DIRS = src src/execute_functions
 
-# default target
+# Find all source files
+SRCS = $(wildcard src/*.cpp) $(wildcard src/execute_functions/*.cpp)
+
+# Generate object files (all in bin/)
+OBJS = $(addprefix $(BIN_DIR)/, $(notdir $(SRCS:.cpp=.o)))
+
+# Default target
 all: $(TARGET)
 
-# linking step
+# Link the executable
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-# compile all .cpp files
+# Rule for src/*.cpp files
 $(BIN_DIR)/%.o: src/%.cpp | $(BIN_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# create the bin directory if it doesn't exist
+# Rule for src/execute_functions/*.cpp files
+$(BIN_DIR)/%.o: src/execute_functions/%.cpp | $(BIN_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Create bin directory
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
 clean:
-	rm -rf $(TARGET) $(BIN_DIR) alpha_vm.out
+	rm -rf $(TARGET) $(BIN_DIR)
 
-remake:
-	make clean && clear && make
+remake: clean all
 
 .PHONY: all clean remake

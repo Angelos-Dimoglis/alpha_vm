@@ -31,6 +31,8 @@ struct avm_memcell {
     avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
 };
 
+extern avm_memcell nil_memcell;
+
 struct avm_memcell_hash {
     size_t operator()(const avm_memcell& m) const;
 };

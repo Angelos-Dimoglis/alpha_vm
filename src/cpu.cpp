@@ -9,10 +9,11 @@ avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
 extern vector<avm_memcell> stack;
-extern vector<double> numConsts;
-extern vector<string> strConsts;
-extern vector<string> namedLibfuncs;
-extern vector<userfunc*> userFuncs;
+
+vector<double> numConsts;
+vector<string> strConsts;
+vector<string> namedLibfuncs;
+vector<userfunc*> userFuncs;
 
 bool executionFinished = 0;
 unsigned pc = 0;
@@ -22,22 +23,32 @@ struct instruction *code = 0;
 
 #define AVM_ENDING_PC codeSize
 
+void execute_uminus(instruction*){}
+void execute_jmp(instruction*){}
+void execute_call(instruction*){}
+void execute_pusharg(instruction*){}
+void execute_funcenter(instruction*){}
+void execute_funcexit(instruction*){}
+void execute_newtable(instruction*){}
+void execute_tablegetelem(instruction*){}
+void execute_tablesetelem(instruction*){}
+void execute_nop(instruction*){}
+
 execute_func_t executeFuncs[] = {
     execute_assign,
     execute_add,
     execute_sub,
     execute_mul,
+    execute_div,
     execute_mod,
     execute_uminus,
-    execute_and,
-    execute_or,
-    execute_not,
     execute_jeq,
     execute_jne,
     execute_jle,
     execute_jge,
     execute_jlt,
     execute_jgt,
+    execute_jmp,
     execute_call,
     execute_pusharg,
     execute_funcenter,

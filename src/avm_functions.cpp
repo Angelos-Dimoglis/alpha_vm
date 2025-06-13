@@ -6,7 +6,7 @@ extern bool executionFinished;
 
 void memclear_string(avm_memcell* m) {
     assert(holds_alternative<string>(m->data));  // ensure it is a string
-    //get<string>(m->data).clear();                // clear the contents
+    get<string>(m->data).clear();                // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {
@@ -101,17 +101,6 @@ bool undef_tobool(avm_memcell* m) {
     assert(0); // NOTE: ?????
     return 0; 
 }
-
-tobool_func_t toboolFuncs[] = {
-    number_tobool,
-    string_tobool,
-    bool_tobool,
-    table_tobool,
-    userfunc_tobool,
-    libfunc_tobool,
-    nil_tobool,
-    undef_tobool
-};
 
 bool avm_tobool(avm_memcell* m) {
     assert(m->type >= 0 && m->type < undef_m);

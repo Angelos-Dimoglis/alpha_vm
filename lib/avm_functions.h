@@ -1,3 +1,4 @@
+#pragma once
 #include <assert.h>
 #include "../lib/avm_memcell.h"
 
@@ -26,6 +27,6 @@ bool libfunc_tobool(avm_memcell* m);
 bool nil_tobool(avm_memcell* m);
 bool undef_tobool(avm_memcell* m);
 
-//tobool_func_t toboolFuncs;
+extern tobool_func_t toboolFuncs[];
 
 bool avm_tobool(avm_memcell* m);
