@@ -13,8 +13,7 @@ double sub_impl(double x, double y) { return x - y; }
 double mul_impl(double x, double y) { return x * y; }
 double div_impl(double x, double y) {
     if (y == 0.0) {
-        avm_warning("Cannot divide with 0!");
-        assert(0);
+        avm_error("Cannot divide with 0!");
     } else {
         return x / y;
     }
@@ -22,8 +21,7 @@ double div_impl(double x, double y) {
 
 double mod_impl(double x, double y) {
     if (((unsigned) y) == 0) {
-        avm_warning("Cannot modulo with 0!");
-        assert(0);
+        avm_error("Cannot modulo with 0!");
     } else {
         return ((unsigned) x) % ((unsigned) y);
     }

@@ -10,8 +10,8 @@ void memclear_string(avm_memcell* m) {
 }
 
 void memclear_table(avm_memcell* m) {
-    //assert(get<avm_table*>(m->data));
-    //get<avm_table*>(m->data)->avm_decrefcounter();
+    assert(holds_alternative<avm_table>(m->data));
+    get<avm_table*>(m->data)->avm_decrefcounter();
 }
 
 memclear_func_t memclearFuncs[] = {
@@ -57,7 +57,7 @@ void avm_assign(avm_memcell* lv, avm_memcell* rv) {
         lv->data = rv->data;
     }
     else if (lv->type == table_m) {
-        //get<avm_table*>(lv->data)->avm_tableincrefcounter();
+        get<avm_table*>(lv->data)->avm_tableincrefcounter();
     }
 }
 
@@ -67,17 +67,17 @@ void avm_error(string format) {
 }
 
 bool number_tobool(avm_memcell* m) {
-    //return get<double>(m->data) != 0; 
+    return get<double>(m->data) != 0; 
     return true;
 }
 
 bool string_tobool(avm_memcell* m) {
-    //return get<string>(m->data)[0] != 0; 
+    return get<string>(m->data)[0] != 0; 
     return true;
 }
 
 bool bool_tobool(avm_memcell* m) {
-    //return get<bool>(m->data); 
+    return get<bool>(m->data); 
     return true;
 }
 
