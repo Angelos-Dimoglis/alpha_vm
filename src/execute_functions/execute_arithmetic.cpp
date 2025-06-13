@@ -17,8 +17,6 @@ double div_impl(double x, double y) {
     } else {
         return x / y;
     }
-
-    return 0.0; // here to supress waring
 }
 
 double mod_impl(double x, double y) {
@@ -27,8 +25,6 @@ double mod_impl(double x, double y) {
     } else {
         return ((unsigned) x) % ((unsigned) y);
     }
-
-    return 0.0; // here to supress waring
 }
 
 arithmetic_func_t arithmeticFuncs[] = {
