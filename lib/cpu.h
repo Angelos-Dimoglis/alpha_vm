@@ -32,3 +32,5 @@ extern void execute_tablesetelem(instruction*);
 extern void execute_nop(instruction*);
 
 avm_memcell* avm_translate_operand (vmarg* arg, avm_memcell* reg);
+
+void execute_cycle (void);

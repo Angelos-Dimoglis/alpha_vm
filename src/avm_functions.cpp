@@ -6,12 +6,12 @@ extern bool executionFinished;
 
 void memclear_string(avm_memcell* m) {
     assert(holds_alternative<string>(m->data));  // ensure it is a string
-    get<string>(m->data).clear();                // clear the contents
+    //get<string>(m->data).clear();                // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {
-    assert(get<avm_table*>(m->data));
-    get<avm_table*>(m->data)->avm_decrefcounter();
+    //assert(get<avm_table*>(m->data));
+    //get<avm_table*>(m->data)->avm_decrefcounter();
 }
 
 memclear_func_t memclearFuncs[] = {
@@ -57,7 +57,7 @@ void avm_assign(avm_memcell* lv, avm_memcell* rv) {
         lv->data = rv->data;
     }
     else if (lv->type == table_m) {
-        get<avm_table*>(lv->data)->avm_tableincrefcounter();
+        //get<avm_table*>(lv->data)->avm_tableincrefcounter();
     }
 }
 
@@ -66,14 +66,41 @@ void avm_error(string format) {
     executionFinished = 1;
 }
 
-bool number_tobool(avm_memcell* m) { return get<double>(m->data) != 0; }
-bool string_tobool(avm_memcell* m) { return get<string>(m->data)[0] != 0; }
-bool bool_tobool(avm_memcell* m) { return get<bool>(m->data); }
-bool table_tobool(avm_memcell* m) { return 1; }
-bool userfunc_tobool(avm_memcell* m) { return 1; }
-bool libfunc_tobool(avm_memcell* m) { return 1; }
-bool nil_tobool(avm_memcell* m) { return 0; }
-bool undef_tobool(avm_memcell* m) { assert(0); return 0; }
+bool number_tobool(avm_memcell* m) {
+    //return get<double>(m->data) != 0; 
+    return true;
+}
+
+bool string_tobool(avm_memcell* m) {
+    //return get<string>(m->data)[0] != 0; 
+    return true;
+}
+
+bool bool_tobool(avm_memcell* m) {
+    //return get<bool>(m->data); 
+    return true;
+}
+
+bool table_tobool(avm_memcell* m) {
+    return 1; 
+}
+
+bool userfunc_tobool(avm_memcell* m) {
+    return 1; 
+}
+
+bool libfunc_tobool(avm_memcell* m) {
+    return 1; 
+}
+
+bool nil_tobool(avm_memcell* m) {
+    return 0; 
+}
+
+bool undef_tobool(avm_memcell* m) {
+    assert(0); // NOTE: ?????
+    return 0; 
+}
 
 tobool_func_t toboolFuncs[] = {
     number_tobool,

@@ -7,7 +7,7 @@ typedef bool (*tobool_func_t) (avm_memcell*);
 void memclear_string(avm_memcell* m);
 void memclear_table(avm_memcell* m);
 
-memclear_func_t memclearFuncs[];
+//memclear_func_t memclearFuncs;
 
 void avm_memcellclear(avm_memcell* m);
 
@@ -26,6 +26,6 @@ bool libfunc_tobool(avm_memcell* m);
 bool nil_tobool(avm_memcell* m);
 bool undef_tobool(avm_memcell* m);
 
-tobool_func_t toboolFuncs[];
+//tobool_func_t toboolFuncs;
 
 bool avm_tobool(avm_memcell* m);

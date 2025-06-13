@@ -10,7 +10,7 @@
 extern avm_memcell ax, bx;
 extern avm_memcell retval;
 
-extern inline vector<avm_memcell> stack;
+extern vector<avm_memcell> stack;
 
 avm_memcell nil_memcell(nil_m);
 
@@ -23,17 +23,16 @@ double div_impl(double x, double y) {
     if (y == 0.0) {
         avm_warning("Cannot divide with 0!");
         assert(0);
-    }
-    else {
+    } else {
         return x / y;
     }
 }
+
 double mod_impl(double x, double y) {
     if (((unsigned) y) == 0) {
         avm_warning("Cannot modulo with 0!");
         assert(0);
-    }
-    else {
+    } else {
         return ((unsigned) x) % ((unsigned) y);
     }
 }
@@ -55,8 +54,7 @@ void execute_arithmetic (instruction* instr) {
     assert(rv1 && rv2);
     if (rv1->type != number_m || rv2->type != number_m) {
         avm_error("Not a number in arithmetic!");
-    }
-    else {
+    } else {
         arithmetic_func_t op = arithmeticFuncs[instr->opcode - add_v];
         avm_memcellclear(lv);
         lv->type = number_m;

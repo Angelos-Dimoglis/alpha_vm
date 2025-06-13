@@ -19,6 +19,7 @@ unsigned pc = 0;
 unsigned currLine = 0;
 unsigned codeSize = 0;
 struct instruction *code = 0;
+
 #define AVM_ENDING_PC codeSize
 
 execute_func_t executeFuncs[] = {

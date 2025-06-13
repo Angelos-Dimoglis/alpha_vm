@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "../lib/avm_functions.h"
+#include "../lib/cpu.h"
 
 using namespace std;
 
@@ -37,8 +38,8 @@ int main(int argc, char **argv) {
 
     // load binary file locally
 
-    //for (;;)
-        // execute instruction
+    //while (!programEnd)
+        //execute_cycle();
 
     cleanup_vm();
 

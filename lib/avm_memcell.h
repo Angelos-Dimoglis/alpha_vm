@@ -18,6 +18,9 @@ enum avm_memcell_t {
     undef_m     = 7 
 };
 
+// AN KSANA PIRAKSEIS TO FORWARD DECLARE THA SOU GAMISW
+class avm_table; // forward declare
+
 struct avm_memcell {
     avm_memcell_t type;
     variant<double, string, bool, avm_table*, unsigned> data;
