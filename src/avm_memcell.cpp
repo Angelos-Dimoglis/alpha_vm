@@ -35,13 +35,6 @@ string avm_memcell::tostring() {
     }
 }
 
-string avm_table::tostring() {
-    string s = "";
-    for (auto& m : indexed)
-        s += m.second.tostring() + " ";
-    return s;
-}
-
 size_t avm_memcell_hash::operator()(const avm_memcell& m) const {
     size_t hashValue = hash<int>()(static_cast<int>(m.type));
 
