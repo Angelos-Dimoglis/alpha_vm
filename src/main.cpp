@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <unistd.h>
 #include <cassert>
 #include <fstream>
@@ -50,37 +51,33 @@ int main(int argc, char **argv) {
         assert(0);
     }
 
-    string text;
-    ifstream my_stream(file_name);
+    FILE *input_file = fopen(file_name, "r"); 
+    if (input_file == nullptr) {
+        cout << "error opening the file\n";
+        assert(0);
+    }
+
     int string_consts_count = 0,
         number_consts_count = 0;
 
-    while (getline(my_stream, text)) {
-        cout << text << endl;
-
+    string separator = "\t";
+    int num;
+    while (fscanf(input_file, "%d", &num)) {
         // check for magic number
-        if (text.find("69420") != string::npos) {
-            cout << "magic number not found" << endl;
-            assert(0);
-        }
-
         // constants
-        if (
-            std::getline(my_stream, line2) &&
-            std::getline(my_stream, line3)
-        ) {
 
-        }
+        cout << num << endl;
     }
 
+    fclose(input_file);
 
+    while (1);
 
     // execute the code
     while (!executionFinished)
         execute_cycle();
 
     cleanup_vm();
-
 
     return 0;
 }
