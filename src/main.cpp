@@ -104,7 +104,7 @@ unsigned int get_user_func_count(ifstream *file) {
 
     *file >> user_funcs_count >> tmp;
 
-    if (tmp != "user_functions" || user_funcs_count != 12 || file->fail()) {
+    if (tmp != "user_functions" || file->fail()) {
         cerr << "Could not read user functions\n";
         assert(0);
     }
@@ -112,7 +112,7 @@ unsigned int get_user_func_count(ifstream *file) {
     userfunc *curr = new userfunc;
     for (int i = 0; i < user_funcs_count; i++) {
         *file >> curr->id >> curr->address >> curr->localSize;
-        if (tmp != "user_functions" || user_funcs_count != 12 || file->fail()) {
+        if (tmp != "user_functions" || file->fail()) {
             cerr << "Could not read user functions\n";
             assert(0);
         }
@@ -125,7 +125,6 @@ unsigned int get_user_func_count(ifstream *file) {
 unsigned int get_library_func_count(ifstream *file) {
     unsigned int library_funcs_count = 0;
     string tmp("");
-
     *file >> library_funcs_count >> tmp;
 
     if (tmp != "library_functions" || library_funcs_count != 12 || file->fail()) {
@@ -136,7 +135,7 @@ unsigned int get_library_func_count(ifstream *file) {
     string curr;
     for (int i = 0; i < library_funcs_count; i++) {
         *file >> curr;
-        if (tmp != "library_functions" || library_funcs_count != 12 || file->fail()) {
+        if (tmp != "library_functions" || file->fail()) {
             cerr << "Could not read library functions\n";
             assert(0);
         }

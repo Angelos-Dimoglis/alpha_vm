@@ -14,7 +14,7 @@ extern unsigned top, topsp;
 extern bool executionFinished;
 extern unsigned pc;
 extern unsigned codeSize;
-extern struct instruction *code;
+extern vector<instruction> code;
 
 #define AVM_ENDING_PC codeSize
 
