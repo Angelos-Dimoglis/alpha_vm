@@ -34,6 +34,10 @@ void execute_call(instruction* instr) {
     }
 }
 
+userfunc *avm_getfuncinfo(unsigned int) {
+    return nullptr;
+}
+
 void execute_funcenter(instruction* instr) {
     avm_memcell* func = avm_translate_operand(&instr->result, &ax);
     assert(func);
