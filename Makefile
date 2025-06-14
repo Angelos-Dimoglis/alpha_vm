@@ -1,4 +1,4 @@
-# Author: Angelos T. Dimoglis
+# Author: Angelos T. Dimoglis & a bit of help from chat ;)
 # AM: csd5078
 
 # Compiler settings
