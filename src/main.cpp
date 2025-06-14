@@ -45,23 +45,39 @@ int main(int argc, char **argv) {
 
     init_vm();
 
-    // load binary file locally
-    instruction *code;
-
-    if (input_file_set) {
-        string text;
-        ifstream my_stream(file_name);
-        while (getline(my_stream, text))
-            cout << text << endl;
-    } else {
-        cout << "file not set\n";
+    if (!input_file_set) {
+        cout << "input file not set\n";
         assert(0);
     }
 
+    string text;
+    ifstream my_stream(file_name);
+    int string_consts_count = 0,
+        number_consts_count = 0;
 
-    while (!executionFinished) {
-        ;
+    while (getline(my_stream, text)) {
+        cout << text << endl;
+
+        // check for magic number
+        if (text.find("69420") != string::npos) {
+            cout << "magic number not found" << endl;
+            assert(0);
+        }
+
+        // constants
+        if (
+            std::getline(my_stream, line2) &&
+            std::getline(my_stream, line3)
+        ) {
+
+        }
     }
+
+
+
+    // execute the code
+    while (!executionFinished)
+        execute_cycle();
 
     cleanup_vm();
 
