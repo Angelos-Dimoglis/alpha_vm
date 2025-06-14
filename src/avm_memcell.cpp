@@ -23,12 +23,12 @@ bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
 }
 
-string avm_memcell::tostring() {
+string avm_memcell::tostring() const {
     switch (type) {
         case number_m:
             return to_string(get<double>(data));
         case string_m:
-            return get<string>(data);
+            return "\"" + get<string>(data) + "\"";
         case bool_m:
             return to_string(get<bool>(data));
         case table_m:
@@ -79,15 +79,6 @@ void avm_table::avm_decrefcounter() {
         delete this;
 }
 
-string avm_table::tostring() {
-    string s = "";
-    for (auto& m : indexed) {
-        s += "[" + m.second.tostring() + "], ";
-    }
-    s.resize(s.size()- 3);
-    return s;
-}
-
 avm_memcell* avm_table::avm_tablegetelem(const avm_memcell& key) {
     auto pair = indexed.find(key);
 
@@ -105,6 +96,17 @@ void avm_table::avm_tablesetelem (
     } else {
         indexed[key] = value;
     }
+}
+
+string avm_table::tostring() {
+    string s = "";
+    for (auto& m : indexed) {
+
+        s += "[ { " + m.first.tostring() + " : " + m.second.tostring() + " }, ";
+    }
+    s.resize(s.size() - 2);
+    s += " ]";
+    return s;
 }
 
 void memclear_string(avm_memcell* m) {

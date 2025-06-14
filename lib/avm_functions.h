@@ -40,3 +40,19 @@ userfunc* avm_getfuncinfo(unsigned i);
 unsigned avm_get_envvalue(unsigned i);
 unsigned avm_totalactuals();
 avm_memcell* avm_getactual(unsigned i);
+void avm_registerlibfunc(string id, library_func_t addr);
+
+extern void libfunc_print();
+extern void libfunc_input();
+extern void libfunc_objectmemberkeys();
+extern void libfunc_objecttotalmembers();
+extern void libfunc_objectcopy();
+extern void libfunc_totalarguments();
+extern void libfunc_argument();
+extern void libfunc_typeof();
+extern void libfunc_strtnum();
+extern void libfunc_sqrt();
+extern void libfunc_cos();
+extern void libfunc_sin();
+
+extern library_func_t libFuncs[];

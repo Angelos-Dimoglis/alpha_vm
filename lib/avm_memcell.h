@@ -29,9 +29,8 @@ struct avm_memcell {
     bool operator==(const avm_memcell& other) const;
 
     avm_memcell() : type(undef_m), data(0.0) {}
-    avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
 
-    string tostring();
+    string tostring() const;
 };
 
 struct avm_memcell_hash {

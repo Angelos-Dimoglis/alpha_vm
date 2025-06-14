@@ -4,7 +4,8 @@
 #include "../lib/avm_functions.h"
 #include "../lib/cpu.h"
 
-extern userfunc* userFuncs[];
+extern vector<string> namedLibfuncs;
+extern vector<userfunc*> userFuncs;
 
 unsigned totalActuals = 0;
 
@@ -139,11 +140,15 @@ void avm_push_table_arg(avm_table* t) {
 
 
 userfunc *avm_getfuncinfo(unsigned i) {
-    return userFuncs[i]; 
+    return userFuncs[i];
 }
 
 library_func_t avm_getlibraryfunc(string id) {
-    return nullptr; // TEMPORARY here to supress warning
+    for (unsigned i = 0; i < namedLibfuncs.size(); i++) {
+        if (id == namedLibfuncs[i]) {
+            return libFuncs[i];
+        }
+    }
 }
 
 void avm_calllibfunc(string id) {
@@ -151,7 +156,21 @@ void avm_calllibfunc(string id) {
     if (!f) {
         avm_error("unsopported lib func " + id + " called!");
     } else {
-
+        avm_callsaveenvironment();
+        topsp = top;
+        totalActuals = 0;
+        (*f)();
+        if (!executionFinished) {
+            execute_funcexit((instruction*) 0);
+        }
     }
 }
 
+unsigned avm_totalactuals() {
+    return avm_get_envvalue(topsp + AVM_NUMACTUALS_OFFSET);
+}
+
+avm_memcell* avm_getactual(unsigned i) {
+    assert(i < avm_totalactuals());
+    return &stack[topsp + AVM_STACKENV_SIZE + 1 + i];
+}
