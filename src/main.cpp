@@ -62,13 +62,27 @@ unsigned int get_string_count(ifstream *file) {
         assert(0);
     }
 
-    string curr;
+    string curr = "";
     for (int i = 0; i < string_consts_count; i++) {
-        *file >> curr;
-        if (file->fail()) {
-            cerr << "Could not read constant strings\n";
-            assert(0);
+        char c;
+        
+        while (file->get(c) && isspace(c)) {}
+
+        if (c != '"') { //in speciall cases such as a..f(b), the symbol f is stored as a string but 
+                        //doesn't have quotes
+            file->unget();
+            *file >> curr;
+        }else {
+            while (file->get(c)) {
+                if (file->fail()) {
+                    cerr << "Could not read constant strings\n";
+                    assert(0);
+                }
+                if (c == '"') break;  // End of string
+                curr += c;
+            }
         }
+        
         strConsts.push_back(curr);
     }
 
