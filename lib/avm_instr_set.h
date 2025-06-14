@@ -63,4 +63,8 @@ struct userfunc {
     unsigned address;
     unsigned localSize;
     string id;
+
+    userfunc() : address(-1), localSize(-1), id("") {}
+
+    userfunc(unsigned address, unsigned localSize, string id) : address(address), localSize(localSize), id(id) {}
 };

@@ -9,16 +9,17 @@ unsigned top, topsp;
 
 vector<avm_memcell> stack;
 
-vector<double> numConsts;
-vector<string> strConsts;
-vector<string> namedLibfuncs;
-vector<userfunc*> userFuncs;
+//Consts are read from main
+extern vector<double> numConsts;
+extern vector<string> strConsts;
+extern vector<string> namedLibfuncs;
+extern vector<userfunc*> userFuncs;
 
 bool executionFinished = 0;
 unsigned pc = 0;
 unsigned currLine = 0;
 unsigned codeSize = 0;
-struct instruction *code = 0;
+extern vector<instruction> code;
 
 //to do
 void execute_jmp(instruction*){}
@@ -57,7 +58,7 @@ void execute_cycle (void) {
     }
 
     assert(pc < AVM_ENDING_PC);
-    struct instruction *instr = code + pc;
+    struct instruction *instr = code.data() + pc;
     assert(instr->opcode >= 0 && instr->opcode <= AVM_MAX_INSTRUCTIONS);
     if (instr->srcLine)
         currLine = instr->srcLine;
