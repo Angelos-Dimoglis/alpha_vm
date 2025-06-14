@@ -149,56 +149,31 @@ unsigned int get_library_func_count(ifstream *file) {
 vmopcode string_to_opcode(string s) {
     vmarg_t type;
     
-    if (s == "assign_v")
-        return assign_v;
-    else if (s == "add_v")
-        return add_v;
-    else if (s == "sub_v")
-        return sub_v;
-    else if (s == "mul_v")
-        return mul_v;
-    else if (s == "div_v")
-        return div_v;
-    else if (s == "mod_v")
-        return mod_v;
-    else if (s == "uminus_v")
-        return uminus_v;
-    else if (s == "and_v")
-        return and_v;
-    else if (s == "or_v")
-        return or_v;
-    else if (s == "not_v")
-        return not_v;
-    else if (s == "jump_v")
-        return jump_v;
-    else if (s == "jeq_v")
-        return jeq_v;
-    else if (s == "jne_v")
-        return jne_v;
-    else if (s == "jle_v")
-        return jle_v;
-    else if (s == "jge_v")
-        return jge_v;
-    else if (s == "jlt_v")
-        return jlt_v;
-    else if (s == "jgt_v")
-        return jgt_v;
-    else if (s == "call_v")
-        return call_v;
-    else if (s == "pusharg_v")
-        return pusharg_v;
-    else if (s == "funcenter_v")
-        return funcenter_v;
-    else if (s == "funcexit_v")
-        return funcexit_v;
-    else if (s == "newtable_v")
-        return newtable_v;
-    else if (s == "tablegetelem_v")
-        return tablegetelem_v;
-    else if (s == "tablesetelem_v")
-        return tablesetelem_v;
-    else if (s == "nop_v")
-        return nop_v;
+    if (s == "assign_v") return assign_v;
+    if (s == "add_v") return add_v;
+    if (s == "sub_v") return sub_v;
+    if (s == "mul_v") return mul_v;
+    if (s == "div_v") return div_v;
+    if (s == "mod_v") return mod_v;
+    if (s == "uminus_v") return uminus_v;
+    if (s == "and_v") return and_v;
+    if (s == "or_v") return or_v;
+    if (s == "not_v") return not_v;
+    if (s == "jump_v") return jump_v;
+    if (s == "jeq_v") return jeq_v;
+    if (s == "jne_v") return jne_v;
+    if (s == "jle_v") return jle_v;
+    if (s == "jge_v") return jge_v;
+    if (s == "jlt_v") return jlt_v;
+    if (s == "jgt_v") return jgt_v;
+    if (s == "call_v") return call_v;
+    if (s == "pusharg_v") return pusharg_v;
+    if (s == "funcenter_v") return funcenter_v;
+    if (s == "funcexit_v") return funcexit_v;
+    if (s == "newtable_v") return newtable_v;
+    if (s == "tablegetelem_v") return tablegetelem_v;
+    if (s == "tablesetelem_v") return tablesetelem_v;
+    if (s == "nop_v") return nop_v;
 
     assert(0);
 }
