@@ -7,8 +7,9 @@ bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
 }
 
+// TODO
 string table_tostring(avm_table* t) {
-
+    return ""; // TEMP here to supress warning
 }
 
 string avm_memcell::tostring() {
@@ -28,10 +29,9 @@ string avm_memcell::tostring() {
 
 string avm_table::tostring() {
     string s = "";
-    for (auto& m : indexed) {
+    for (auto& m : indexed)
         s += m.second.tostring() + " ";
-    }
-
+    return s;
 }
 
 size_t avm_memcell_hash::operator()(const avm_memcell& m) const {
@@ -87,8 +87,8 @@ void avm_table::avm_tablesetelem (
 }
 
 void memclear_string(avm_memcell* m) {
-    assert(m->data.index());  // ensure it is a string
-    get<string>(m->data).clear();                // clear the contents
+    assert(m->data.index());      // ensure it is a string
+    get<string>(m->data).clear(); // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {
