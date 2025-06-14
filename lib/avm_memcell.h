@@ -29,6 +29,7 @@ struct avm_memcell {
 
     avm_memcell() : type(undef_m), data(0.0) {}
     avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
+    string tostring();
 };
 
 extern avm_memcell nil_memcell;

@@ -19,6 +19,8 @@ string avm_memcell::tostring() {
             return to_string(get<bool>(data));
         case table_m:
             return "nikos";
+        default:
+            assert(0);
     }
 }
 
