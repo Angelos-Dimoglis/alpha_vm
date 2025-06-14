@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
         assert(0);
     }
 
-    FILE *input_file = fopen(file_name, "r"); 
+    FILE *input_file = fopen(file_name.c_str(), "r"); 
     if (input_file == nullptr) {
         cout << "error opening the file\n";
         assert(0);

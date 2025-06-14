@@ -2,7 +2,6 @@
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
 #include "../lib/cpu.h"
-#include "../lib/runtime_stack.h"
 
 #define AVM_STACKENV_SIZE 4
 avm_memcell ax, bx, cx, retval;

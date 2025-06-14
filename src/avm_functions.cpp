@@ -169,17 +169,19 @@ void avm_push_table_arg(avm_table* t) {
 
 string avm_tostring(avm_memcell* m) {
     assert(m->type >= 0 && m->type <= undef_m);
+    return ""; // TEMPORARY here to supress warning
 }
 
 //TODO
-library_func_t avm_getlibraryfunc(string id) { }
+library_func_t avm_getlibraryfunc(string id) {
+    return nullptr; // TEMPORARY here to supress warning
+}
 
 void avm_calllibfunc(string id) {
     library_func_t f = avm_getlibraryfunc(id);
     if (!f) {
         avm_error("unsopported lib func " + id + " called!");
-    }
-    else {
+    } else {
 
     }
 }
