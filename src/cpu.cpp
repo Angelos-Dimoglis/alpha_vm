@@ -97,7 +97,7 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
 
         case bool_a: {
             reg->type = bool_m;
-            reg->data = arg->val; // TODO: might do a wrong comversion
+            reg->data = arg->val; // TODO: might do a wrong conversion
             return reg;
         }
 

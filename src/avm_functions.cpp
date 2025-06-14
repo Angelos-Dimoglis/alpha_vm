@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+
 #include "../lib/avm_functions.h"
 #include "../lib/cpu.h"
 
@@ -68,7 +69,7 @@ bool nil_tobool(avm_memcell* m) {
 }
 
 bool undef_tobool(avm_memcell* m) {
-    assert(0); // NOTE: ????? (se ponaw)
+    assert(0); // NOTE: is this valid?
     return 0; 
 }
 
@@ -99,12 +100,10 @@ void avm_call_functor(avm_table* t) {
 }
 
 void avm_dec_top() {
-    if (!top) {
+    if (!top)
         avm_error("stack overflow");
-    }
-    else {
+    else
         top--;
-    }
 }
 
 void avm_push_envvalue(unsigned val) {
