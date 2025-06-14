@@ -181,28 +181,17 @@ vmopcode string_to_opcode(string s) {
 vmarg_t string_to_arg_type(string s) {
     vmarg_t type;
     
-    if (s == "label_a")
-        return label_a;
-    else if (s == "global_a")
-        return global_a;
-    else if (s == "formal_a")
-        return formal_a;
-    else if (s == "local_a")
-        return local_a;
-    else if (s == "number_a")
-        return number_a;
-    else if (s == "string_a")
-        return string_a;
-    else if (s == "bool_a")
-        return bool_a;
-    else if (s == "nil_a")
-        return nil_a;
-    else if (s == "userfunc_a")
-        return userfunc_a;
-    else if (s == "libfunc_a")
-        return libfunc_a;
-    else if (s == "retval_a")
-        return retval_a;
+    if (s == "label_a") return label_a;
+    if (s == "global_a") return global_a;
+    if (s == "formal_a") return formal_a;
+    if (s == "local_a") return local_a;
+    if (s == "number_a") return number_a;
+    if (s == "string_a") return string_a;
+    if (s == "bool_a") return bool_a;
+    if (s == "nil_a") return nil_a;
+    if (s == "userfunc_a") return userfunc_a;
+    if (s == "libfunc_a") return libfunc_a;
+    if (s == "retval_a") return retval_a;
 
     assert(0);
 }
