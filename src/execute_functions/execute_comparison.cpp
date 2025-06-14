@@ -14,17 +14,6 @@ tobool_func_t toboolFuncs[] = {
     undef_tobool
 };
 
-string typeStrings[] = {
-    "number",
-    "string",
-    "bool",
-    "table",
-    "userfunc",
-    "libfunc",
-    "nil",
-    "undef"
-};
-
 bool jle_impl(double x, double y) { return x <= y; }
 bool jge_impl(double x, double y) { return x >= y; }
 bool jlt_impl(double x, double y) { return x < y; }

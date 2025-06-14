@@ -7,6 +7,8 @@
 
 using namespace std;
 
+extern string typeStrings[];
+
 enum avm_memcell_t {
     number_m    = 0,
     string_m    = 1,

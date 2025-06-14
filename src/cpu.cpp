@@ -108,7 +108,7 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
         case userfunc_a: {
             reg->type = userfunc_m;
             // TODO: see lec 15 slide 10
-            reg->data = userFuncs[arg->val]->address;
+            reg->data = arg->val;
             return reg;
         }
 

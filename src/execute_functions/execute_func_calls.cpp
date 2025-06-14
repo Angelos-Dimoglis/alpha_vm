@@ -34,6 +34,7 @@ void execute_call(instruction* instr) {
     }
 }
 
+//TODO: Return userfunc with localSize
 userfunc *avm_getfuncinfo(unsigned int) {
     return nullptr;
 }

@@ -8,6 +8,17 @@ using namespace std;
 extern vector<string> namedLibfuncs;
 extern vector<userfunc*> userFuncs;
 
+string typeStrings[] = {
+    "number",
+    "string",
+    "bool",
+    "table",
+    "userfunc",
+    "libfunc",
+    "nil",
+    "undef"
+};
+
 bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
 }
@@ -29,7 +40,7 @@ string avm_memcell::tostring() {
         case nil_m:
             return "nil";
         case undef_m:
-            cerr << "tostring: cannot convert undefined value!";
+            cerr << "tostring: cannot convert undefined value!" << endl;
         default:
             assert(0);
     }
