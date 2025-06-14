@@ -14,7 +14,20 @@ extern bool executionFinished;
 
 vector<double> numConsts;
 vector<string> strConsts;
-vector<string> namedLibfuncs;
+vector<string> namedLibfuncs = {
+    "print",
+    "input",
+    "objectmemberkeys",
+    "objecttotalmembers",
+    "objectcopy",
+    "totalarguments",
+    "argument",
+    "typeof",
+    "strtonum",
+    "sqrt",
+    "cos",
+    "sin"
+};
 vector<userfunc*> userFuncs;
 
 vector<instruction> code;

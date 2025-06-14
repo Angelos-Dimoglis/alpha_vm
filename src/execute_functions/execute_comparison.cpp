@@ -108,3 +108,9 @@ void execute_comparison(instruction* instr) {
         pc = instr->result.val;
     }
 }
+
+void execute_jmp(instruction* instr) {
+    assert(instr->result.type == label_a);
+
+    pc = instr->result.val;
+}

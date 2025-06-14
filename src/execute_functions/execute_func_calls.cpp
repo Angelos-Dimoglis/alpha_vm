@@ -1,11 +1,6 @@
 #include "../../lib/avm_functions.h"
 #include "../../lib/cpu.h"
 
-#define AVM_NUMACTUALS_OFFSET   +4
-#define AVM_SAVEDPC_OFFSET      +3
-#define AVM_SAVEDTOP_OFFSET     +2
-#define AVM_SAVEDTOPSP_OFFSET   +1
-
 extern unsigned totalActuals;
 
 void execute_call(instruction* instr) {
@@ -34,10 +29,7 @@ void execute_call(instruction* instr) {
     }
 }
 
-//TODO: Return userfunc with localSize
-userfunc *avm_getfuncinfo(unsigned int) {
-    return nullptr;
-}
+//TODO: Return userfunc with localSize and check if right amount
 
 void execute_funcenter(instruction* instr) {
     avm_memcell* func = avm_translate_operand(&instr->result, &ax);

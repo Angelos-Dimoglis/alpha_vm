@@ -4,6 +4,8 @@
 #include "../lib/avm_functions.h"
 #include "../lib/cpu.h"
 
+extern userfunc* userFuncs[];
+
 unsigned totalActuals = 0;
 
 void avm_warning(string format) {
@@ -135,7 +137,11 @@ void avm_push_table_arg(avm_table* t) {
     avm_dec_top();
 }
 
-//TODO
+
+userfunc *avm_getfuncinfo(unsigned i) {
+    return userFuncs[i]; 
+}
+
 library_func_t avm_getlibraryfunc(string id) {
     return nullptr; // TEMPORARY here to supress warning
 }

@@ -3,7 +3,6 @@
 #include "../lib/avm_instr_set.h"
 #include "../lib/cpu.h"
 
-#define AVM_STACKENV_SIZE 4
 avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
@@ -13,7 +12,6 @@ vector<avm_memcell> stack;
 extern vector<double> numConsts;
 extern vector<string> strConsts;
 extern vector<string> namedLibfuncs;
-extern vector<userfunc*> userFuncs;
 
 bool executionFinished = 0;
 unsigned pc = 0;

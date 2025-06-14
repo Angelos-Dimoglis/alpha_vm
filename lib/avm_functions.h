@@ -1,7 +1,12 @@
 #pragma once
 #include <assert.h>
 #include "../lib/avm_memcell.h"
+#include "../lib/avm_instr_set.h"
 
+#define AVM_NUMACTUALS_OFFSET   +4
+#define AVM_SAVEDPC_OFFSET      +3
+#define AVM_SAVEDTOP_OFFSET     +2
+#define AVM_SAVEDTOPSP_OFFSET   +1
 
 typedef bool (*tobool_func_t) (avm_memcell*);
 typedef void (*library_func_t) (void);
@@ -31,5 +36,7 @@ void avm_calllibfunc(string funcName);
 void avm_callsaveenvironment();
 void avm_call_functor(avm_table* t);
 void avm_push_table_arg(avm_table* t);
-struct userfunc* avm_getfuncinfo(unsigned i);
+userfunc* avm_getfuncinfo(unsigned i);
 unsigned avm_get_envvalue(unsigned i);
+unsigned avm_totalactuals();
+avm_memcell* avm_getactual(unsigned i);
