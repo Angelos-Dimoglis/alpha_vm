@@ -12,15 +12,13 @@ vector<avm_memcell> stack;
 extern vector<double> numConsts;
 extern vector<string> strConsts;
 extern vector<string> namedLibfuncs;
+extern vector<userfunc*> userFuncs;
 
 bool executionFinished = 0;
 unsigned pc = 0;
 unsigned currLine = 0;
 unsigned codeSize = 0;
 extern vector<instruction> code;
-
-//to do
-void execute_jmp(instruction*){}
 
 execute_func_t executeFuncs[] = {
     execute_assign,
