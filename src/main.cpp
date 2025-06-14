@@ -148,31 +148,27 @@ unsigned int get_library_func_count(ifstream *file) {
 vmopcode string_to_opcode(string s) {
     vmarg_t type;
     
-    if (s == "assign_v") return assign_v;
-    if (s == "add_v") return add_v;
-    if (s == "sub_v") return sub_v;
-    if (s == "mul_v") return mul_v;
-    if (s == "div_v") return div_v;
-    if (s == "mod_v") return mod_v;
-    if (s == "uminus_v") return uminus_v;
-    if (s == "and_v") return and_v;
-    if (s == "or_v") return or_v;
-    if (s == "not_v") return not_v;
-    if (s == "jump_v") return jump_v;
-    if (s == "jeq_v") return jeq_v;
-    if (s == "jne_v") return jne_v;
-    if (s == "jle_v") return jle_v;
-    if (s == "jge_v") return jge_v;
-    if (s == "jlt_v") return jlt_v;
-    if (s == "jgt_v") return jgt_v;
-    if (s == "call_v") return call_v;
-    if (s == "pusharg_v") return pusharg_v;
-    if (s == "funcenter_v") return funcenter_v;
-    if (s == "funcexit_v") return funcexit_v;
-    if (s == "newtable_v") return newtable_v;
-    if (s == "tablegetelem_v") return tablegetelem_v;
-    if (s == "tablesetelem_v") return tablesetelem_v;
-    if (s == "nop_v") return nop_v;
+    if (s == "assign") return assign_v;
+    if (s == "add") return add_v;
+    if (s == "sub") return sub_v;
+    if (s == "mul") return mul_v;
+    if (s == "div") return div_v;
+    if (s == "mod") return mod_v;
+    if (s == "if_eq") return jeq_v;
+    if (s == "if_not_eq") return jne_v;
+    if (s == "if_less_eq") return jle_v;
+    if (s == "if_greater_eq") return jge_v;
+    if (s == "if_less") return jlt_v;
+    if (s == "if_greater") return jgt_v;
+    if (s == "jump") return jump_v;
+    if (s == "call") return call_v;
+    if (s == "param") return pusharg_v;
+    if (s == "funcstart") return funcenter_v;
+    if (s == "funcend") return funcexit_v;
+    if (s == "newtable") return newtable_v;
+    if (s == "tablegetelem") return tablegetelem_v;
+    if (s == "tablesetelem") return tablesetelem_v;
+    if (s == "nop") return nop_v;
 
     assert(0);
 }
@@ -283,9 +279,9 @@ int main(int argc, char **argv) {
 
     cout << "str: " + to_string(string_consts_count) <<
     "\nnum: " + to_string(number_consts_count) <<
-    "\nuser functions" + to_string(user_funcs_count) <<
-    "\nlibrary functions" + to_string(library_funcs_count) <<
-    "\ninstructions count" + to_string(instructions_count) << endl;
+    "\nuser functions: " + to_string(user_funcs_count) <<
+    "\nlibrary functions: " + to_string(library_funcs_count) <<
+    "\ninstructions count: " + to_string(instructions_count) << endl;
 
     file.close();
 
