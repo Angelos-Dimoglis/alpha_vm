@@ -29,7 +29,7 @@ void execute_call(instruction* instr) {
             break;
 
         default: {
-            avm_error("call: cannot bind " + avm_tostring(func) + " to function!");
+            avm_error("call: cannot bind " + func->tostring() + " to function!");
         }
     }
 }

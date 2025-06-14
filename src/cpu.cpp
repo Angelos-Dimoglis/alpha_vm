@@ -22,7 +22,6 @@ struct instruction *code = 0;
 
 //to do
 void execute_jmp(instruction*){}
-void execute_newtable(instruction*){}
 void execute_tablegetelem(instruction*){}
 void execute_tablesetelem(instruction*){}
 void execute_nop(instruction*){}

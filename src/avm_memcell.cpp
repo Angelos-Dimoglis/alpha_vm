@@ -1,15 +1,15 @@
 #include <cassert>
+#include <iostream>
 #include "../lib/avm_memcell.h"
+#include "../lib/avm_instr_set.h"
 
 using namespace std;
 
+extern vector<string> namedLibfuncs;
+extern vector<userfunc*> userFuncs;
+
 bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
-}
-
-// TODO
-string table_tostring(avm_table* t) {
-    return ""; // TEMP here to supress warning
 }
 
 string avm_memcell::tostring() {
@@ -21,7 +21,15 @@ string avm_memcell::tostring() {
         case bool_m:
             return to_string(get<bool>(data));
         case table_m:
-            return "nikos";
+            return get<avm_table*>(data)->tostring();
+        case userfunc_m:
+            return userFuncs[get<unsigned>(data)]->id;
+        case libfunc_m:
+            return get<string>(data);
+        case nil_m:
+            return "nil";
+        case undef_m:
+            cerr << "tostring: cannot convert undefined value!";
         default:
             assert(0);
     }
@@ -67,6 +75,15 @@ void avm_table::avm_decrefcounter() {
         delete this;
 }
 
+string avm_table::tostring() {
+    string s = "";
+    for (auto& m : indexed) {
+        s += "[" + m.second.tostring() + "], ";
+    }
+    s.resize(s.size()- 3);
+    return s;
+}
+
 avm_memcell* avm_table::avm_tablegetelem(const avm_memcell& key) {
     auto pair = indexed.find(key);
 
@@ -87,12 +104,12 @@ void avm_table::avm_tablesetelem (
 }
 
 void memclear_string(avm_memcell* m) {
-    assert(m->data.index());      // ensure it is a string
-    get<string>(m->data).clear(); // clear the contents
+    assert(m->data.index() == 1);  // ensure it is a string
+    get<string>(m->data).clear();                // clear the contents
 }
 
 void memclear_table(avm_memcell* m) {
-    assert(m->data.index());
+    assert(m->data.index() == 3);
     get<avm_table*>(m->data)->avm_decrefcounter();
 }
 
