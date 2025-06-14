@@ -29,10 +29,9 @@ struct avm_memcell {
 
     avm_memcell() : type(undef_m), data(0.0) {}
     avm_memcell(avm_memcell_t type) : type(type), data(0.0) {}
+
     string tostring();
 };
-
-extern avm_memcell nil_memcell;
 
 struct avm_memcell_hash {
     size_t operator()(const avm_memcell& m) const;
@@ -50,4 +49,14 @@ class avm_table {
         void avm_decrefcounter();
         avm_memcell* avm_tablegetelem(const avm_memcell& key);
         void avm_tablesetelem(const avm_memcell& key, const avm_memcell& value);
+        string tostring();
 };
+
+typedef void (*memclear_func_t) (avm_memcell*);
+
+void memclear_string(avm_memcell* m);
+void memclear_table(avm_memcell* m);
+
+extern memclear_func_t memclearFuncs[];
+
+void avm_memcellclear(avm_memcell* m);

@@ -2,16 +2,9 @@
 #include <assert.h>
 #include "../lib/avm_memcell.h"
 
-typedef void (*memclear_func_t) (avm_memcell*);
+
 typedef bool (*tobool_func_t) (avm_memcell*);
 typedef void (*library_func_t) (void);
-
-void memclear_string(avm_memcell* m);
-void memclear_table(avm_memcell* m);
-
-extern memclear_func_t memclearFuncs[];
-
-void avm_memcellclear(avm_memcell* m);
 
 void avm_warning(string format);
 

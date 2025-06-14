@@ -3,10 +3,12 @@
 
 using namespace std;
 
-avm_memcell nil_memcell(nil_m);
-
 bool avm_memcell::operator==(const avm_memcell& other) const {
     return type == other.type && data == other.data;
+}
+
+string table_tostring(avm_table* t) {
+
 }
 
 string avm_memcell::tostring() {
@@ -22,6 +24,14 @@ string avm_memcell::tostring() {
         default:
             assert(0);
     }
+}
+
+string avm_table::tostring() {
+    string s = "";
+    for (auto& m : indexed) {
+        s += m.second.tostring() + " ";
+    }
+
 }
 
 size_t avm_memcell_hash::operator()(const avm_memcell& m) const {
@@ -73,5 +83,36 @@ void avm_table::avm_tablesetelem (
         indexed.erase(key);
     } else {
         indexed[key] = value;
+    }
+}
+
+void memclear_string(avm_memcell* m) {
+    assert(m->data.index());  // ensure it is a string
+    get<string>(m->data).clear();                // clear the contents
+}
+
+void memclear_table(avm_memcell* m) {
+    assert(m->data.index());
+    get<avm_table*>(m->data)->avm_decrefcounter();
+}
+
+memclear_func_t memclearFuncs[] = {
+    0, /*number*/
+    memclear_string,
+    0, /*bool*/
+    memclear_table,
+    0, /*usefunc*/
+    0, /*libfunc*/
+    0, /*nil*/
+    0  /*undef*/
+};
+
+void avm_memcellclear(avm_memcell* m) {
+    if (m->type != undef_m) {
+        memclear_func_t f = memclearFuncs[m->type];
+        if (f) {
+            (*f) (m);
+        }
+        m->type = undef_m;
     }
 }

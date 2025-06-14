@@ -5,37 +5,6 @@
 
 unsigned totalActuals = 0;
 
-void memclear_string(avm_memcell* m) {
-    //assert(holds_alternative<string>(m->data));  // ensure it is a string
-    get<string>(m->data).clear();                // clear the contents
-}
-
-void memclear_table(avm_memcell* m) {
-    //assert(holds_alternative<avm_table>(m->data));
-    get<avm_table*>(m->data)->avm_decrefcounter();
-}
-
-memclear_func_t memclearFuncs[] = {
-    0, /*number*/
-    memclear_string,
-    0, /*bool*/
-    memclear_table,
-    0, /*usefunc*/
-    0, /*libfunc*/
-    0, /*nil*/
-    0  /*undef*/
-};
-
-void avm_memcellclear(avm_memcell* m) {
-    if (m->type != undef_m) {
-        memclear_func_t f = memclearFuncs[m->type];
-        if (f) {
-            (*f) (m);
-        }
-        m->type = undef_m;
-    }
-}
-
 void avm_warning(string format) {
     cout << format << endl;
 }
@@ -165,11 +134,6 @@ void avm_push_table_arg(avm_table* t) {
     get<avm_table*>(stack[top].data)->avm_tableincrefcounter();
     totalActuals++;
     avm_dec_top();
-}
-
-string avm_tostring(avm_memcell* m) {
-    assert(m->type >= 0 && m->type <= undef_m);
-    return ""; // TEMPORARY here to supress warning
 }
 
 //TODO

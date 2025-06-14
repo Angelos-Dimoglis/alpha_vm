@@ -33,7 +33,7 @@ arithmetic_func_t arithmeticFuncs[] = {
 };
 
 void execute_arithmetic (instruction* instr) {
-    avm_memcell* lv = avm_translate_operand(&instr->result, &nil_memcell);
+    avm_memcell* lv = avm_translate_operand(&instr->result, nullptr);
     avm_memcell* rv1 = avm_translate_operand(&instr->arg1, &ax);
     avm_memcell* rv2 = avm_translate_operand(&instr->arg2, &bx);
 
