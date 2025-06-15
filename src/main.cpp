@@ -132,6 +132,7 @@ unsigned int get_user_func_count(ifstream *file) {
             assert(0);
         }
         userFuncs.push_back(curr);
+        curr = new userfunc;
     }
 
     return user_funcs_count;
