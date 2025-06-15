@@ -48,13 +48,14 @@ execute_func_t executeFuncs[] = {
 
 void execute_cycle (void) {
     if (executionFinished) {
-        printf("finished\n");
+        printf("execution is already done\n");
         return;
     }
 
     if (pc == AVM_ENDING_PC) {
         executionFinished = true;
-        printf("reached the end\n");
+        printf("pc reached the end of the program, \
+            setting exectionFinished to true\n");
         return;
     }
 
@@ -64,6 +65,9 @@ void execute_cycle (void) {
     if (instr->srcLine)
         currLine = instr->srcLine;
     unsigned oldPC = pc;
+
+    cout << "pc: " << pc << endl;
+
     (*executeFuncs[instr->opcode])(instr);
     if (pc == oldPC)
         pc++;
