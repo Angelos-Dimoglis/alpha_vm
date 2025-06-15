@@ -120,7 +120,7 @@ avm_table* avm_table::memberkeys() {
     for (auto i : indexed) {
         avm_memcell* new_key = new avm_memcell();
         new_key->type = number_m;
-        new_key->data = counter;
+        new_key->data = (double)counter;
         new_table->avm_tablesetelem(*new_key, i.first);
         counter++;
     }

@@ -146,7 +146,7 @@ void libfunc_argument() {
                 avm_error("type cannot be " + typeStrings[m1->type] + " in 'argument'!");
             }
             else {
-                avm_memcell* m2 = &stack[p_topsp + AVM_STACKENV_SIZE + 1 + get<double>(m1->data)];
+                avm_memcell* m2 = &stack[p_topsp + AVM_STACKENV_SIZE + 1 + (unsigned)get<double>(m1->data)];
                 retval.type = m2->type;
                 retval.data = m2->data;
             }
