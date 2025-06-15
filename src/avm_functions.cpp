@@ -149,6 +149,7 @@ library_func_t avm_getlibraryfunc(string id) {
             return libFuncs[i];
         }
     }
+    return nullptr;
 }
 
 void avm_calllibfunc(string id) {

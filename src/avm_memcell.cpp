@@ -109,6 +109,32 @@ string avm_table::tostring() {
     return s;
 }
 
+//TODO: Check of logic is correct
+avm_table* avm_table::memberkeys() {
+    avm_table* new_table = new avm_table();
+    unsigned counter = 0;
+    for (auto i : indexed) {
+        avm_memcell* new_key = new avm_memcell();
+        new_key->type = number_m;
+        new_key->data = counter;
+        new_table->avm_tablesetelem(*new_key, i.first);
+        counter++;
+    }
+    return new_table;
+}
+
+unsigned avm_table::totalmembers() {
+    return indexed.size();
+}
+
+avm_table* avm_table::copy() {
+    avm_table* new_table = new avm_table();
+    for (auto i : indexed) {
+        new_table->avm_tablesetelem(i.first, i.second);
+    }
+    return new_table;
+}
+
 void memclear_string(avm_memcell* m) {
     assert(m->data.index() == 1);  // ensure it is a string
     get<string>(m->data).clear();                // clear the contents
