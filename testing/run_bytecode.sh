@@ -6,7 +6,8 @@ if [ -z $1 ]; then
 fi
 
 for test_file in testing/byte_code/b_"$1"/*.abc; do
+    echo "-------------------------------------------------------------------"
     echo "$test_file"
-    ./alpha_vm.out -i "$test_file" 1>/dev/null
+    ./alpha_vm.out -i "$test_file"  1>/dev/null
     echo
 done
