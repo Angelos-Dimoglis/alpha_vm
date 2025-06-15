@@ -81,14 +81,16 @@ unsigned int get_number_count(ifstream *file) {
     *file >> number_consts_count >> tmp;
 
     if (tmp != "constant_numbers" || file->fail()) {
+        cout << "tmp" << endl;
         cerr << "Could not read constant numbers\n";
         assert(0);
     }
 
-    unsigned int curr;
+    double curr;
     for (int i = 0; i < number_consts_count; i++) {
         *file >> curr;
         if (file->fail()) {
+            cout << "mid file " << i << endl;
             cerr << "Could not read constant numbers\n";
             assert(0);
         }
@@ -277,17 +279,20 @@ int main(int argc, char **argv) {
         library_funcs_count = get_library_func_count(&file),
         instructions_count  = get_instruction_count(&file);
 
+    /*
     cout << "str: " + to_string(string_consts_count) <<
     "\nnum: " + to_string(number_consts_count) <<
     "\nuser functions: " + to_string(user_funcs_count) <<
     "\nlibrary functions: " + to_string(library_funcs_count) <<
     "\ninstructions count: " + to_string(instructions_count) << endl;
+    */
 
     file.close();
 
     // execute the code
-    /* while (!executionFinished)
-        execute_cycle(); */
+    printf("starting execution\n");
+    while (!executionFinished)
+        execute_cycle();
 
     cleanup_vm();
 
