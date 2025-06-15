@@ -3,7 +3,7 @@
 
 void execute_newtable(instruction* instr) {
     avm_memcell* lv = avm_translate_operand(&instr->result, (avm_memcell*) 0);
-    assert(lv && (&stack[0] <= lv && &stack[top] > lv || lv == &retval));
+    assert(lv && (&stack[AVM_STACK_SIZE-1] >= lv && &stack[top] < lv || lv == &retval));
 
     avm_memcellclear(lv);
 
