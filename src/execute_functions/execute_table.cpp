@@ -18,7 +18,7 @@ void execute_tablegetelem(instruction* instr) {
     avm_memcell* i = avm_translate_operand(&instr->arg2, &ax);
 
     assert(lv && (&stack[AVM_STACK_SIZE-1] >= lv && &stack[top] < lv || lv == &retval));
-    assert(t && &stack[0] <= t && &stack[top] > t);
+    assert(t && &stack[AVM_STACK_SIZE-1] >= t && &stack[top] < t);
     assert(i);
 
     avm_memcellclear(lv);
