@@ -1,8 +1,11 @@
 #include <assert.h>
+#include <cstdio>
 #include "../../lib/cpu.h"
 #include "../../lib/avm_functions.h"
 
 void execute_assign(instruction* instr) {
+    printf("enetered execute assign\n");
+
     avm_memcell* lv = avm_translate_operand(&instr->result, (avm_memcell*) 0);
     avm_memcell* rv = avm_translate_operand(&instr->arg1, &ax);
 
