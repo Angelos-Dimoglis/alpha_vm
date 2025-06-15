@@ -4,10 +4,11 @@
 #include "../lib/avm_memcell.h"
 
 #define AVM_STACKENV_SIZE 4
+#define AVM_STACK_SIZE 2048
 
 typedef void (*execute_func_t) (instruction*);
 
-extern vector<avm_memcell> stack;
+extern avm_memcell stack[];
 extern avm_memcell ax, bx, cx, retval;
 extern unsigned top, topsp;
 

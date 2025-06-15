@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cstdio>
+#include <iostream>
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
 #include "../lib/cpu.h"
@@ -7,7 +8,7 @@
 avm_memcell ax, bx, cx, retval;
 unsigned top, topsp;
 
-vector<avm_memcell> stack;
+avm_memcell stack[AVM_STACK_SIZE];
 
 //Consts are read from main
 extern vector<double> numConsts;
@@ -67,7 +68,7 @@ void execute_cycle (void) {
     if (pc == oldPC)
         pc++;
 
-    printf("cycle complete\n");
+    cout << "cycle complete, opcode: " << instr->opcode << endl;
 }
 
 // this will be called by the execute_... functions
@@ -79,7 +80,7 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
         assert(reg != nullptr);
 
     switch (arg->type) {
-        case global_a: return &stack[stack.size() - 1 - arg->val];
+        case global_a: return &stack[AVM_STACK_SIZE - 1 - arg->val];
         case local_a:  return &stack[topsp - arg->val];
         case formal_a: return &stack[topsp + AVM_STACKENV_SIZE + 1 + arg->val];
         case retval_a: return &retval;

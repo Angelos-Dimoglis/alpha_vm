@@ -96,7 +96,6 @@ unsigned int get_number_count(ifstream *file) {
     *file >> number_consts_count >> tmp;
 
     if (tmp != "constant_numbers" || file->fail()) {
-        cout << "tmp" << endl;
         cerr << "Could not read constant numbers\n";
         assert(0);
     }
@@ -105,7 +104,6 @@ unsigned int get_number_count(ifstream *file) {
     for (int i = 0; i < number_consts_count; i++) {
         *file >> curr;
         if (file->fail()) {
-            cout << "mid file " << i << endl;
             cerr << "Could not read constant numbers\n";
             assert(0);
         }
@@ -226,9 +224,9 @@ unsigned int get_instruction_count(ifstream *file) {
         string arg1_type, arg2_type, result_type;
         unsigned int arg1_val, arg2_val, result_val;
         *file >> instr_opcode >>
+        result_type >> result_val >>
         arg1_type >> arg1_val >>
-        arg2_type >> arg2_val >>
-        result_type >> result_val;
+        arg2_type >> arg2_val;
 
         if (file->fail()) {
             cerr << "Could not read instructions\n";
@@ -289,26 +287,29 @@ int main(int argc, char **argv) {
     is_valid_binary(&file);
 
     unsigned int 
-        string_consts_count = get_string_count(&file),
+        string_consts_count = get_string_count(&file);
+
+    cout << endl;
+    for (string &s : strConsts)
+        cout << s << endl;
+
+    unsigned int 
         number_consts_count = get_number_count(&file),
         user_funcs_count    = get_user_func_count(&file),
         library_funcs_count = get_library_func_count(&file),
         instructions_count  = get_instruction_count(&file);
 
-    /*
-    cout << "str: " + to_string(string_consts_count) <<
-    "\nnum: " + to_string(number_consts_count) <<
-    "\nuser functions: " + to_string(user_funcs_count) <<
-    "\nlibrary functions: " + to_string(library_funcs_count) <<
-    "\ninstructions count: " + to_string(instructions_count) << endl;
-    */
+    cout << "str: " + to_string(string_consts_count) << endl;
+    cout << "num: " + to_string(number_consts_count) << endl;
+    cout << "user functions: " + to_string(user_funcs_count) << endl;
+    cout << "library functions: " + to_string(library_funcs_count) << endl;
+    cout << "instructions count: " + to_string(instructions_count) << endl;
+
 
     file.close();
 
     // execute the code
-    printf("starting execution\n");
     while (!executionFinished) {
-        printf("cycle\n");
         execute_cycle();
     }
 
