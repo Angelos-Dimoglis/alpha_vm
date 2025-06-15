@@ -319,6 +319,16 @@ int main(int argc, char **argv) {
         cout << "str: " + to_string(string_consts_count) << endl;
         cout << "num: " + to_string(number_consts_count) << endl;
         cout << "user functions: " + to_string(user_funcs_count) << endl;
+        int i = 0;
+        if (user_funcs_count != 0)
+            cout << "id, address, local size" << endl;
+        for (userfunc *f : userFuncs) {
+            cout << i << ": ";
+            cout << f->id << ", ";
+            cout << f->address << ", ";
+            cout << f->localSize << endl;
+            i++;
+        }
         cout << "library functions: " + to_string(library_funcs_count) << endl;
         cout << "globals count: " << globals_count << endl;
         cout << "instructions count: " + to_string(instructions_count) << endl;
