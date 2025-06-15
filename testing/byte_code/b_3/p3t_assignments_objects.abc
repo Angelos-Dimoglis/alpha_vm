@@ -56,7 +56,7 @@
 	tablegetelem	global_a 1	global_a 0	string_a 4	
 	tablegetelem	global_a 2	global_a 1	string_a 1	
 	tablegetelem	global_a 3	global_a 2	number_a 1	
-	param	nil_a 3042429184	nil_a 0	nil_a 0	
+	param	nil_a 4112841728	nil_a 0	nil_a 0	
 	call	global_a 3	nil_a 0	nil_a 0	
 	assign	global_a 4	retval_a 0	nil_a 0	
 	tablesetelem	global_a 0	string_a 2	number_a 3	

@@ -114,7 +114,7 @@
 	call	userfunc_a 1	nil_a 0	nil_a 0	
 	assign	global_a 2	retval_a 0	nil_a 0	
 	tablegetelem	global_a 1	global_a 0	string_a 3	
-	param	nil_a 3799761920	nil_a 0	nil_a 0	
+	param	nil_a 471889920	nil_a 0	nil_a 0	
 	call	global_a 1	nil_a 0	nil_a 0	
 	assign	global_a 2	retval_a 0	nil_a 0	
 	param	global_a 2	nil_a 0	nil_a 0	
@@ -122,7 +122,7 @@
 	call	userfunc_a 1	nil_a 0	nil_a 0	
 	assign	global_a 3	retval_a 0	nil_a 0	
 	tablegetelem	global_a 1	global_a 0	string_a 3	
-	param	nil_a 3799761920	nil_a 0	nil_a 0	
+	param	nil_a 471889920	nil_a 0	nil_a 0	
 	call	global_a 1	nil_a 0	nil_a 0	
 	assign	global_a 2	retval_a 0	nil_a 0	
 	param	nil_a 2	nil_a 0	nil_a 0	
