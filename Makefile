@@ -42,4 +42,7 @@ clean:
 
 remake: clean all
 
+run_tests:
+	./testing/run_bytecode.sh 4-5
+
 .PHONY: all clean remake
