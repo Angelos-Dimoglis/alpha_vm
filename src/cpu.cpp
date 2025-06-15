@@ -14,7 +14,7 @@ extern vector<string> strConsts;
 extern vector<string> namedLibfuncs;
 extern vector<userfunc*> userFuncs;
 
-bool executionFinished = 0;
+bool executionFinished = false;
 unsigned pc = 0;
 unsigned currLine = 0;
 unsigned codeSize = 0;
@@ -45,11 +45,14 @@ execute_func_t executeFuncs[] = {
 };
 
 void execute_cycle (void) {
-    if (executionFinished)
+    if (executionFinished) {
+        printf("finished\n");
         return;
+    }
 
     if (pc == AVM_ENDING_PC) {
-        executionFinished = 1;
+        executionFinished = true;
+        printf("reached the end\n");
         return;
     }
 

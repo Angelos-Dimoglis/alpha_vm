@@ -11,6 +11,7 @@
 using namespace std;
 
 extern bool executionFinished;
+extern unsigned codeSize;
 
 vector<double> numConsts;
 vector<string> strConsts;
@@ -204,6 +205,7 @@ unsigned int get_instruction_count(ifstream *file) {
         assert(0);
     }
 
+    codeSize = instructions_count;
     instruction curr;
     for (int i = 0; i < instructions_count; i++)  {
         string instr_opcode;
@@ -291,9 +293,12 @@ int main(int argc, char **argv) {
 
     // execute the code
     printf("starting execution\n");
-    while (!executionFinished)
+    while (!executionFinished) {
+        printf("cycle\n");
         execute_cycle();
+    }
 
+    printf("ended execution\n");
     cleanup_vm();
 
     return 0;
