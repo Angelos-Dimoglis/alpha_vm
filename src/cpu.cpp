@@ -84,9 +84,9 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg) {
         assert(reg != nullptr);
 
     switch (arg->type) {
-        case global_a: return &stack[AVM_STACK_SIZE - 1 - arg->val];
-        case local_a:  return &stack[topsp - arg->val];
-        case formal_a: return &stack[topsp + AVM_STACKENV_SIZE + 1 + arg->val];
+        case global_a: return &stack[arg->val];
+        case local_a:  return &stack[topsp + arg->val];
+        case formal_a: return &stack[topsp - AVM_STACKENV_SIZE - 1 - arg->val];
         case retval_a: return &retval;
 
         case number_a: {

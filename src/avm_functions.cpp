@@ -72,7 +72,7 @@ bool nil_tobool(avm_memcell* m) {
 }
 
 bool undef_tobool(avm_memcell* m) {
-    assert(0); // NOTE: is this valid?
+    assert(0); // NOTE: is this valid? (Oxi den einai alla den peirazei ez)
     return 0; 
 }
 
@@ -168,10 +168,10 @@ void avm_calllibfunc(string id) {
 }
 
 unsigned avm_totalactuals() {
-    return avm_get_envvalue(topsp + AVM_NUMACTUALS_OFFSET);
+    return avm_get_envvalue(topsp - AVM_NUMACTUALS_OFFSET);
 }
 
 avm_memcell* avm_getactual(unsigned i) {
     assert(i < avm_totalactuals());
-    return &stack[topsp + AVM_STACKENV_SIZE + 1 + i];
+    return &stack[topsp - AVM_STACKENV_SIZE - 1 - i];
 }

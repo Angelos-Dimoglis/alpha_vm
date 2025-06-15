@@ -3,10 +3,10 @@
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
 
-#define AVM_NUMACTUALS_OFFSET   +4
-#define AVM_SAVEDPC_OFFSET      +3
-#define AVM_SAVEDTOP_OFFSET     +2
-#define AVM_SAVEDTOPSP_OFFSET   +1
+#define AVM_NUMACTUALS_OFFSET   4
+#define AVM_SAVEDPC_OFFSET      3
+#define AVM_SAVEDTOP_OFFSET     2
+#define AVM_SAVEDTOPSP_OFFSET   1
 
 typedef bool (*tobool_func_t) (avm_memcell*);
 typedef void (*library_func_t) (void);
