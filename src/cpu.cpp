@@ -66,13 +66,14 @@ void execute_cycle (void) {
         currLine = instr->srcLine;
     unsigned oldPC = pc;
 
-    cout << "pc: " << pc << endl;
+    cout << "will execute opcode: " << instr->opcode <<
+        " pc: " << pc << endl;
 
     (*executeFuncs[instr->opcode])(instr);
     if (pc == oldPC)
         pc++;
 
-    cout << "cycle complete, opcode: " << instr->opcode << endl;
+    cout << "cycle complete" << endl;
 }
 
 // this will be called by the execute_... functions

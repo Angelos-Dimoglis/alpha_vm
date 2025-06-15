@@ -248,6 +248,18 @@ unsigned int get_instruction_count(ifstream *file) {
     return instructions_count;
 }
 
+unsigned int get_globals_count(ifstream *file) {
+    unsigned int globals_count = 0;
+    string tmp("");
+
+    *file >> globals_count >> tmp;
+    if (tmp != "num_of_globals" || file->fail()) {
+        cerr << "Could not read instructions\n";
+        assert(0);
+    }
+
+    return globals_count;
+}
 
 int main(int argc, char **argv) {
     bool input_file_set = false;
@@ -287,24 +299,32 @@ int main(int argc, char **argv) {
     is_valid_binary(&file);
 
     unsigned int 
-        string_consts_count = get_string_count(&file);
-
-    cout << endl;
-    for (string &s : strConsts)
-        cout << s << endl;
-
-    unsigned int 
+        string_consts_count = get_string_count(&file),
         number_consts_count = get_number_count(&file),
         user_funcs_count    = get_user_func_count(&file),
         library_funcs_count = get_library_func_count(&file),
+        globals_count       = get_globals_count(&file),
         instructions_count  = get_instruction_count(&file);
 
-    cout << "str: " + to_string(string_consts_count) << endl;
-    cout << "num: " + to_string(number_consts_count) << endl;
-    cout << "user functions: " + to_string(user_funcs_count) << endl;
-    cout << "library functions: " + to_string(library_funcs_count) << endl;
-    cout << "instructions count: " + to_string(instructions_count) << endl;
+    /*
+    cout << endl;
+    for (string &s : strConsts)
+        cout << s << endl;
+    */
 
+    bool print_info = true;
+    if (print_info) {
+        cout << endl;
+        cout << "===== INFO =====" << endl;
+        cout << "str: " + to_string(string_consts_count) << endl;
+        cout << "num: " + to_string(number_consts_count) << endl;
+        cout << "user functions: " + to_string(user_funcs_count) << endl;
+        cout << "library functions: " + to_string(library_funcs_count) << endl;
+        cout << "globals count: " << globals_count << endl;
+        cout << "instructions count: " + to_string(instructions_count) << endl;
+        cout << "================" << endl;
+        cout << endl;
+    }
 
     file.close();
 
