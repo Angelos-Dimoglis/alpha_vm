@@ -102,11 +102,11 @@ void avm_call_functor(avm_table* t) {
     }
 }
 
-void avm_dec_top() {
-    if (!top)
+void avm_inc_top() {
+    if (top == AVM_STACK_SIZE)
         avm_error("stack overflow");
     else
-        top--;
+        top++;
 }
 
 void avm_push_envvalue(unsigned val) {
