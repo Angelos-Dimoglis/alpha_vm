@@ -29,6 +29,13 @@ make
 
 * -i \<input file\> // meaning a binary or text .abc file
 
+## How to run
+
+Example:
+```
+./alpha_vm.out -i bytecode.abc
+```
+
 ## Note on the directory structure
 
 * bin/
