@@ -53,7 +53,7 @@ void execute_funcexit(instruction* unused) {
 }
 
 void execute_pusharg(instruction* instr) {
-    avm_memcell* arg = avm_translate_operand(&instr->arg1, &ax);
+    avm_memcell* arg = avm_translate_operand(&instr->result, &ax);
     assert(arg);
 
     avm_assign(&stack[top], arg);
