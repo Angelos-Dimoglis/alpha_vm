@@ -103,7 +103,7 @@ void avm_call_functor(avm_table* t) {
 }
 
 void avm_inc_top() {
-    if (top == AVM_STACK_SIZE)
+    if (top == AVM_STACK_SIZE - 1)
         avm_error("stack overflow");
     else
         top++;
@@ -140,7 +140,12 @@ void avm_push_table_arg(avm_table* t) {
 
 
 userfunc *avm_getfuncinfo(unsigned i) {
-    return userFuncs[i];
+    for (auto f : userFuncs) {
+        if (f->address = i) {
+            return f;
+        }
+    }
+    assert(0);
 }
 
 library_func_t avm_getlibraryfunc(string id) {
@@ -149,7 +154,7 @@ library_func_t avm_getlibraryfunc(string id) {
             return libFuncs[i];
         }
     }
-    return nullptr;
+    assert(0);
 }
 
 void avm_calllibfunc(string id) {

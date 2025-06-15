@@ -39,16 +39,16 @@ void execute_funcenter(instruction* instr) {
     totalActuals = 0;
     userfunc* funcInfo = avm_getfuncinfo(pc);
     topsp = top;
-    top = top - funcInfo->localSize;
+    top = top + funcInfo->localSize;
 }
 
 void execute_funcexit(instruction* unused) {
     unsigned oldTop = top;
-    top = avm_get_envvalue(topsp + AVM_SAVEDTOP_OFFSET);
-    pc = avm_get_envvalue(topsp + AVM_SAVEDPC_OFFSET);
-    topsp = avm_get_envvalue(topsp + AVM_SAVEDTOPSP_OFFSET);
+    top = avm_get_envvalue(topsp - AVM_SAVEDTOP_OFFSET);
+    pc = avm_get_envvalue(topsp - AVM_SAVEDPC_OFFSET);
+    topsp = avm_get_envvalue(topsp - AVM_SAVEDTOPSP_OFFSET);
 
-    while (++oldTop <= top)
+    while (--oldTop >= top)
         avm_memcellclear(&stack[oldTop]);
 }
 

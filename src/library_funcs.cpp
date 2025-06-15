@@ -115,7 +115,7 @@ void libfunc_objectcopy() {
 }
 
 void libfunc_totalarguments() {
-    unsigned p_topsp = avm_get_envvalue(topsp + AVM_SAVEDTOPSP_OFFSET);
+    unsigned p_topsp = avm_get_envvalue(topsp - AVM_SAVEDTOPSP_OFFSET);
     avm_memcellclear(&retval);
     if (!p_topsp) {
         avm_error("'totalarguments' called outside of a function!");
@@ -123,12 +123,12 @@ void libfunc_totalarguments() {
     }
     else {
         retval.type = number_m;
-        retval.data = avm_get_envvalue(p_topsp + AVM_NUMACTUALS_OFFSET);
+        retval.data = avm_get_envvalue(p_topsp - AVM_NUMACTUALS_OFFSET);
     }
 }
 
 void libfunc_argument() {
-    unsigned p_topsp = avm_get_envvalue(topsp + AVM_SAVEDTOPSP_OFFSET);
+    unsigned p_topsp = avm_get_envvalue(topsp - AVM_SAVEDTOPSP_OFFSET);
     unsigned n = avm_totalactuals();
     avm_memcellclear(&retval);
 
@@ -146,7 +146,7 @@ void libfunc_argument() {
                 avm_error("type cannot be " + typeStrings[m1->type] + " in 'argument'!");
             }
             else {
-                avm_memcell* m2 = &stack[p_topsp + AVM_STACKENV_SIZE + 1 + (unsigned)get<double>(m1->data)];
+                avm_memcell* m2 = &stack[p_topsp - AVM_STACKENV_SIZE - 1 - (unsigned)get<double>(m1->data)];
                 retval.type = m2->type;
                 retval.data = m2->data;
             }

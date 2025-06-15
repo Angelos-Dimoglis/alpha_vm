@@ -326,6 +326,8 @@ int main(int argc, char **argv) {
         cout << endl;
     }
 
+    top = globals_count + 1;
+
     file.close();
 
     // execute the code
