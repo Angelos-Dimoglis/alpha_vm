@@ -1,5 +1,6 @@
 #include <cassert>
 #include <iostream>
+#include <iomanip>
 #include "../lib/avm_memcell.h"
 #include "../lib/avm_instr_set.h"
 
@@ -24,19 +25,26 @@ bool avm_memcell::operator==(const avm_memcell& other) const {
 }
 
 string avm_memcell::tostring() const {
+    ostringstream oss;
     switch (type) {
         case number_m:
-            return to_string(get<double>(data));
+            oss << setprecision(3) << get<double>(data);
+            return oss.str();
         case string_m:
-            return "\"" + get<string>(data) + "\"";
+            return get<string>(data);
         case bool_m:
-            return to_string(get<bool>(data));
+            if (get<bool>(data) == true) {
+                return "true";
+            }
+            else {
+                return "false";
+            }
         case table_m:
             return get<avm_table*>(data)->tostring();
         case userfunc_m:
-            return userFuncs[get<unsigned>(data)]->id;
+            return "user function " + to_string(get<unsigned>(data));
         case libfunc_m:
-            return get<string>(data);
+            return "library function " + get<string>(data);
         case nil_m:
             return "nil";
         case undef_m:
