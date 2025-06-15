@@ -91,6 +91,10 @@ avm_memcell* avm_table::avm_tablegetelem(const avm_memcell& key) {
 void avm_table::avm_tablesetelem (
     const avm_memcell& key, const avm_memcell& value
 ) {
+    if (key.type == undef_m) {
+        cerr << "table key cannot be of type 'undef'" << endl;
+        assert(0);
+    }
     if (value.type == nil_m) {
         indexed.erase(key);
     } else {
