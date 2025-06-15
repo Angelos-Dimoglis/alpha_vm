@@ -58,5 +58,5 @@ void execute_pusharg(instruction* instr) {
 
     avm_assign(&stack[top], arg);
     totalActuals++;
-    avm_dec_top();
+    avm_inc_top();
 }

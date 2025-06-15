@@ -112,7 +112,7 @@ void avm_inc_top() {
 void avm_push_envvalue(unsigned val) {
     stack[top].type = number_m;
     stack[top].data = val;
-    avm_dec_top();
+    avm_inc_top();
 }
 
 void avm_callsaveenvironment() {
@@ -135,7 +135,7 @@ void avm_push_table_arg(avm_table* t) {
     stack[top].data = t;
     get<avm_table*>(stack[top].data)->avm_tableincrefcounter();
     totalActuals++;
-    avm_dec_top();
+    avm_inc_top();
 }
 
 

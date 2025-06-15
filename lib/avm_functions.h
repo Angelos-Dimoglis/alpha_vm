@@ -31,7 +31,7 @@ extern tobool_func_t toboolFuncs[];
 bool avm_tobool(avm_memcell* m);
 
 string avm_tostring(avm_memcell*);
-void avm_dec_top();
+void avm_inc_top();
 void avm_calllibfunc(string funcName);
 void avm_callsaveenvironment();
 void avm_call_functor(avm_table* t);
