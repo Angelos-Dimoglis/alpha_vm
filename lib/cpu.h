@@ -4,7 +4,7 @@
 #include "../lib/avm_memcell.h"
 
 #define AVM_STACKENV_SIZE 4
-#define AVM_STACK_SIZE 2048
+#define AVM_STACK_SIZE 4096
 
 typedef void (*execute_func_t) (instruction*);
 
