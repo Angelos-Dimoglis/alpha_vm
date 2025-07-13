@@ -3,7 +3,7 @@
 
 # Compiler settings
 CC = g++
-CFLAGS = -g -Ilib -std=c++20 -O0
+CFLAGS = -g -Ilib -std=c++20
 
 # Target executable
 TARGET = alpha_vm.out
