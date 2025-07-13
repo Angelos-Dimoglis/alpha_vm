@@ -30,18 +30,13 @@ vector<string> namedLibfuncs = {
     "sin"
 };
 vector<userfunc*> userFuncs;
-
 vector<instruction> code;
-
-void init_vm() {
-}
-
-void cleanup_vm() {
-}
 
 void is_valid_binary(ifstream *file) {
     int magic_number = 0;
-    string tmp(""); // Helper variable. Simply reads what the number we are reading is, from a comment that is next to it in the binary file.
+    // Helper variable. Simply reads what the number we are reading is, from a
+    // comment that is next to it in the binary file.
+    string tmp("");
 
     *file >> magic_number >> tmp;
 
@@ -66,13 +61,14 @@ unsigned int get_string_count(ifstream *file) {
     for (int i = 0; i < string_consts_count; i++) {
         char c;
         
-        while (file->get(c) && isspace(c)) {}
+        while (file->get(c) && isspace(c));
 
-        if (c != '"') { //in speciall cases such as a..f(b), the symbol f is stored as a string but 
-                        //doesn't have quotes
-            file->unget();
-            *file >> curr;
-        }else {
+        if (c != '"') {
+          // in speciall cases such as a..f(b), the symbol f is stored as a
+          // string but doesn't have quotes
+          file->unget();
+          *file >> curr;
+        } else {
             while (file->get(c)) {
                 if (file->fail()) {
                     cerr << "Could not read constant strings\n";
@@ -283,8 +279,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    init_vm();
-
     if (!input_file_set) {
         cerr << "input file not set\n";
         assert(0);
@@ -337,6 +331,7 @@ int main(int argc, char **argv) {
         cout << endl;
     }
 
+    // NOTE: where is top?
     top = globals_count + 1;
 
     file.close();
@@ -347,7 +342,6 @@ int main(int argc, char **argv) {
     }
 
     printf("ended execution\n");
-    cleanup_vm();
 
     return 0;
 }
